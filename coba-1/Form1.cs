@@ -19,24 +19,33 @@ namespace coba_1
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            TextBox txtNama = new TextBox();
-            TextBox txtEmail = new TextBox();
+            //MessageBox.Show("Terima kasih telah melakukan pemesanan tiket, " + txtNama.Text + "!");
 
-            if (txtNama.Text != "" || txtEmail.Text != "")
+            if (txtNama.Text == "" || txtNo.Text == "")
             {
-                MessageBox.Show("Data tidak boleh kosong", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Harap mengisi form terlebih dahulu", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (txtNo.Text.Length < 11)
+            {
+                MessageBox.Show("Nomor harus terdiri dari 11 - 12 karakter", "Peringatan",
+                               MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (txtNo.Text.Length > 13)
+            {
+                MessageBox.Show("Nomor tidak boleh lebih dari 13 karakter", "Peringatan",
+                               MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (!long.TryParse(txtNo.Text, out _))
+            {
+                MessageBox.Show("Nomor harus berupa angka", "Peringatan",
+                               MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBox.Show("Data sudah diisi", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                MessageBox.Show($"Data berhasil disimpan!\nNama : {txtNama.Text}\nEmail : {txtEmail.Text}", "Sukses!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                txtEmail.Clear();
-                txtNama.Clear();
+                MessageBox.Show("Terima kasih telah melakukan pemesanan tiket, " + txtNama.Text + "!");
             }
-        }
 
-        
+            this.Close();
+        }
     }
 }
