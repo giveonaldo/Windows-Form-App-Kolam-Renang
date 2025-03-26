@@ -43,9 +43,11 @@ namespace coba_1
             else
             {
                 MessageBox.Show("Terima kasih telah melakukan pemesanan tiket, " + txtNama.Text + "!");
-            }
 
-            this.Close();
+                Form2 form2 = new Form2();
+                form2.Show();
+                this.Hide();
+            }
         }
     }
 }
