@@ -49,13 +49,15 @@ namespace coba_1
 
         private void btnBayar_Click(object sender, EventArgs e)
         {
-            if (selectedPanel == null)
+            if (dgvTable.SelectedRows.Count > 0)
+            {
+                Application.Exit();
+            } else
             {
                 MessageBox.Show("Silakan pilih salah satu tiket terlebih dahulu!", "Peringatan",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
             }
-            Application.Exit();
+            
         }
 
         private void Form2_Load(object sender, EventArgs e)
