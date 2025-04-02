@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,45 +17,34 @@ namespace coba_1
         private readonly Color selectedColor = Color.DarkCyan;
         private readonly Color defaultColor = Color.LightBlue;
 
+        // Initialize MySqlConnection
+        static string connString = "server=localhost; database=kolam_renang_pacific; uid=root; pwd=;";
+
         public Form2()
         {
             InitializeComponent();
-            InitializeCustomComponents();
+            LoadTiket();
         }
 
-        private void InitializeCustomComponents()
+        private void LoadTiket()
         {
-            // Set up panel selection behavior
-            panel1.Click += Panel_Click;
-            panel2.Click += Panel_Click;
-
-            // Set up button
-            btnBayar.Click += btnBayar_Click;
-
-            // Initialize panel appearance
-            panel1.BackColor = defaultColor;
-            panel2.BackColor = defaultColor;
-        }
-
-        private void Panel_Click(object sender, EventArgs e)
-        {
-            // Reset previous selection
-            if (selectedPanel != null)
+            MySqlConnection conn = new MySqlConnection(connString);
+            try
             {
-                selectedPanel.BackColor = defaultColor;
+                conn.Open();
+                string query = "SELECT Jenis, Harga, Durasi FROM tiket";
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                dgvTable.AutoGenerateColumns = true;
+                dgvTable.DataSource = dt;
+
             }
-
-            // Set new selection
-            selectedPanel = sender as Panel;
-            selectedPanel.BackColor = selectedColor;
-
-            // Label warna
-            lblReguler.ForeColor = Color.Black;
-            lblMember.ForeColor = Color.Black;
-            lblHarian.ForeColor = Color.Black;
-            lblBulanan.ForeColor = Color.Black;
-            lblPanel1.ForeColor = Color.Black;
-            lblPanel2.ForeColor = Color.Black;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnBayar_Click(object sender, EventArgs e)
@@ -65,27 +55,23 @@ namespace coba_1
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            string message = "";
-
-            if (selectedPanel == panel1)
-            {
-                message = "Anda memilih:\n" +
-                          "Jenis: Reguler\n" +
-                          "Waktu: Harian\n" +
-                          "Harga: Rp. 15,000";
-            }
-            else if (selectedPanel == panel2)
-            {
-                message = "Anda memilih:\n" +
-                          "Jenis: Member\n" +
-                          "Waktu: Bulanan\n" +
-                          "Harga: Rp. 100,000";
-            }
-
-            MessageBox.Show(message, "Konfirmasi Tiket",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
             Application.Exit();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvTable.Rows[e.RowIndex];
+                string id = row.Cells[0].Value.ToString();
+                string nama = row.Cells[1].Value.ToString();
+                string harga = row.Cells[2].Value.ToString();
+            }
         }
     }
 }
