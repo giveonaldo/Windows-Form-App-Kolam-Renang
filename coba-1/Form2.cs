@@ -32,7 +32,7 @@ namespace coba_1
             try
             {
                 conn.Open();
-                string query = "SELECT Jenis, Harga, Durasi FROM tiket";
+                string query = "SELECT TiketID, Jenis, Harga, Durasi FROM tiket";
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
@@ -51,14 +51,73 @@ namespace coba_1
         {
             if (dgvTable.SelectedRows.Count > 0)
             {
-                Application.Exit();
-            } else
+                DataGridViewRow selectedRow = dgvTable.SelectedRows[0];
+                int tiketID = Convert.ToInt32(selectedRow.Cells["TiketID"].Value);
+
+                int pelangganID = GetLatestPelangganID();
+                if (pelangganID == -1)
+                {
+                    MessageBox.Show("Gagal mendapatkan PelangganID!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string query = "INSERT INTO transaksi (PelangganID, TiketID, TanggalBeli) " +
+                               "VALUES (@PelangganID, @TiketID, CURRENT_TIMESTAMP)";
+
+                using (MySqlConnection conn = new MySqlConnection(connString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@PelangganID", pelangganID);
+                            cmd.Parameters.AddWithValue("@TiketID", tiketID);
+
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        MessageBox.Show("Transaksi berhasil disimpan!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Application.Exit();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
             {
                 MessageBox.Show("Silakan pilih salah satu tiket terlebih dahulu!", "Peringatan",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
         }
+
+        private int GetLatestPelangganID()
+        {
+            string query = "SELECT PelangganID FROM pelanggan ORDER BY PelangganID DESC LIMIT 1";
+            using (MySqlConnection conn = new MySqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return -1; // Return -1 if PelangganID could not be retrieved
+        }
+
 
         private void Form2_Load(object sender, EventArgs e)
         {
