@@ -80,10 +80,6 @@
             this.label2.Size = new System.Drawing.Size(407, 24);
             this.label2.TabIndex = 3;
             this.label2.Text = "Admin Panel Kolam Renang Pacific Ocean";
-<<<<<<< HEAD
-            
-=======
->>>>>>> 81b7390d8e513ee2ca88b95232ae3ed466ba02db
             // 
             // btnTambah
             // 
@@ -97,11 +93,7 @@
             this.btnTambah.TabIndex = 4;
             this.btnTambah.Text = "Tambah";
             this.btnTambah.UseVisualStyleBackColor = false;
-<<<<<<< HEAD
-            
-=======
-            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
->>>>>>> 81b7390d8e513ee2ca88b95232ae3ed466ba02db
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click_1);
             // 
             // btnTransaksi
             // 

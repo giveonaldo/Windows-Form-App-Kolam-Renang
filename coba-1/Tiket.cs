@@ -49,12 +49,12 @@ namespace coba_1
             this.Hide();
         }
 
-        private void btnTambah_Click(object sender, EventArgs e)
+        private void btnTambah_Click_1(object sender, EventArgs e)
         {
-
+            // Pindah ke Kelola tiket
+            KelolaTiket kelolaTiket = new KelolaTiket();
+            kelolaTiket.Show();
+            this.Hide();
         }
-
-        
-
     }
 }
