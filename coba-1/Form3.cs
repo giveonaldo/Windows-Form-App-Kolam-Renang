@@ -17,15 +17,16 @@ namespace coba_1
         public Form3()
         {
             InitializeComponent();
+            LoadTransaksi();
         }
 
-        private void LoadTiket()
+        private void LoadTransaksi()
         {
             MySqlConnection conn = new MySqlConnection(connString);
             try
             {
                 conn.Open();
-                string query = "SELECT TiketID, Jenis, Harga, Durasi FROM tiket";
+                string query = "SELECT * FROM transaksi";
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
@@ -44,20 +45,27 @@ namespace coba_1
 
         }
 
-        private void dgvTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgvTable.Rows[e.RowIndex];
-                string id = row.Cells[0].Value.ToString();
-                string nama = row.Cells[1].Value.ToString();
-                string harga = row.Cells[2].Value.ToString();
-            }
-        }
+        //private void dgvTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.RowIndex >= 0)
+        //    {
+        //        DataGridViewRow row = dgvTable.Rows[e.RowIndex];
+        //        string id = row.Cells[0].Value.ToString();
+        //        string nama = row.Cells[1].Value.ToString();
+        //        string harga = row.Cells[2].Value.ToString();
+        //    }
+        //}
 
         private void Form3_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnTiket_Click(object sender, EventArgs e)
+        {
+            Tiket tiket = new Tiket();
+            tiket.Show();
+            this.Hide();
         }
     }
 }

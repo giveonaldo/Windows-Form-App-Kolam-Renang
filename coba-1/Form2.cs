@@ -78,9 +78,7 @@ namespace coba_1
                         }
 
                         MessageBox.Show("Transaksi berhasil disimpan!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Form3 form3 = new Form3();
-                        form3.Show();
-                        //Application.Exit();
+                        Application.Exit();
                     }
                     catch (Exception ex)
                     {

@@ -26,7 +26,14 @@ namespace coba_1
             MySqlConnection conn = new MySqlConnection(connString);
             try
             {
-                if (txtNama.Text == "" || txtNo.Text == "")
+                if (txtNama.Text == "Admin" && txtNo.Text == "Admin")
+                {
+                    MessageBox.Show("Selamat Datang Admin", "Success", MessageBoxButtons.OK);
+                    Form3 form3 = new Form3();
+                    form3.Show();
+                    this.Hide();
+                }
+                else if (txtNama.Text == "" || txtNo.Text == "")
                 {
                     MessageBox.Show("Harap mengisi form terlebih dahulu", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
