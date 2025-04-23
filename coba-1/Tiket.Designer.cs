@@ -91,7 +91,7 @@
             this.btnTambah.TabIndex = 4;
             this.btnTambah.Text = "Tambah";
             this.btnTambah.UseVisualStyleBackColor = false;
-            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click_1);
             // 
             // btnTransaksi
             // 
