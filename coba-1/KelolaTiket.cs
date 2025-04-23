@@ -71,6 +71,8 @@ namespace coba_1
                         txtHarga.Clear();
                         txtDurasi.Clear();
 
+                        LoadTiket();
+
                     }
                     else
                     {
