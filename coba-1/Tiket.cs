@@ -45,5 +45,10 @@ namespace coba_1
         {
 
         }
+
+        private void dgvTiket_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

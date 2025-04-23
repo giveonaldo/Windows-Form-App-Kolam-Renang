@@ -43,6 +43,7 @@
             this.dgvTiket.RowTemplate.Height = 24;
             this.dgvTiket.Size = new System.Drawing.Size(542, 290);
             this.dgvTiket.TabIndex = 0;
+            this.dgvTiket.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTiket_CellContentClick);
             // 
             // label1
             // 

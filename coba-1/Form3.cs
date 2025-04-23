@@ -45,17 +45,6 @@ namespace coba_1
 
         }
 
-        //private void dgvTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (e.RowIndex >= 0)
-        //    {
-        //        DataGridViewRow row = dgvTable.Rows[e.RowIndex];
-        //        string id = row.Cells[0].Value.ToString();
-        //        string nama = row.Cells[1].Value.ToString();
-        //        string harga = row.Cells[2].Value.ToString();
-        //    }
-        //}
-
         private void Form3_Load(object sender, EventArgs e)
         {
 

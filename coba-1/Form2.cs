@@ -13,11 +13,7 @@ namespace coba_1
 {
     public partial class Form2: Form
     {
-        private Panel selectedPanel = null;
-        private readonly Color selectedColor = Color.DarkCyan;
-        private readonly Color defaultColor = Color.LightBlue;
-
-        // Initialize MySqlConnection
+        
         static string connString = "server=localhost; database=kolam_renang_pacific; uid=root; pwd=;";
 
         public Form2()
