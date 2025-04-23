@@ -26,7 +26,7 @@ namespace coba_1
             try
             {
                 conn.Open();
-                string query = "SELECT * FROM tiket";
+                string query = "SELECT Jenis, Harga, Durasi FROM tiket";
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
@@ -39,26 +39,6 @@ namespace coba_1
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void btnPelanggan_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvTiket_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
