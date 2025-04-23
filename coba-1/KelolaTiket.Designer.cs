@@ -50,6 +50,7 @@
             this.dgvKelolaTiket.RowTemplate.Height = 24;
             this.dgvKelolaTiket.Size = new System.Drawing.Size(662, 228);
             this.dgvKelolaTiket.TabIndex = 0;
+            this.dgvKelolaTiket.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKelolaTiket_CellContentClick);
             // 
             // txtJenisTiket
             // 
@@ -120,6 +121,7 @@
             this.btnUpdate.TabIndex = 8;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
             // 
@@ -130,6 +132,7 @@
             this.btnDelete.TabIndex = 9;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // KelolaTiket
             // 
