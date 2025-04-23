@@ -42,7 +42,7 @@
             // 
             this.dgvTiket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTiket.Location = new System.Drawing.Point(23, 124);
-            this.dgvTiket.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvTiket.Margin = new System.Windows.Forms.Padding(2);
             this.dgvTiket.Name = "dgvTiket";
             this.dgvTiket.RowHeadersWidth = 51;
             this.dgvTiket.RowTemplate.Height = 24;
@@ -63,7 +63,7 @@
             // btnPelanggan
             // 
             this.btnPelanggan.Location = new System.Drawing.Point(619, 142);
-            this.btnPelanggan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPelanggan.Margin = new System.Windows.Forms.Padding(2);
             this.btnPelanggan.Name = "btnPelanggan";
             this.btnPelanggan.Size = new System.Drawing.Size(126, 28);
             this.btnPelanggan.TabIndex = 2;
@@ -87,28 +87,30 @@
             this.btnTambah.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTambah.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnTambah.Location = new System.Drawing.Point(23, 72);
-            this.btnTambah.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTambah.Margin = new System.Windows.Forms.Padding(2);
             this.btnTambah.Name = "btnTambah";
             this.btnTambah.Size = new System.Drawing.Size(92, 38);
             this.btnTambah.TabIndex = 4;
             this.btnTambah.Text = "Tambah";
             this.btnTambah.UseVisualStyleBackColor = false;
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
             // 
             // btnTransaksi
             // 
             this.btnTransaksi.Location = new System.Drawing.Point(619, 82);
-            this.btnTransaksi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTransaksi.Margin = new System.Windows.Forms.Padding(2);
             this.btnTransaksi.Name = "btnTransaksi";
             this.btnTransaksi.Size = new System.Drawing.Size(126, 28);
             this.btnTransaksi.TabIndex = 5;
             this.btnTransaksi.Text = "Daftar Transaksi";
             this.btnTransaksi.UseVisualStyleBackColor = true;
+            this.btnTransaksi.Click += new System.EventHandler(this.btnTransaksi_Click);
             // 
             // btnTiket
             // 
             this.btnTiket.BackColor = System.Drawing.Color.Lime;
             this.btnTiket.Location = new System.Drawing.Point(619, 203);
-            this.btnTiket.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTiket.Margin = new System.Windows.Forms.Padding(2);
             this.btnTiket.Name = "btnTiket";
             this.btnTiket.Size = new System.Drawing.Size(126, 28);
             this.btnTiket.TabIndex = 6;
@@ -127,7 +129,7 @@
             this.Controls.Add(this.btnPelanggan);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvTiket);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Tiket";
             this.Text = "Tiket";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTiket)).EndInit();

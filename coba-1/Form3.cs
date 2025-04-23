@@ -47,6 +47,12 @@ namespace coba_1
             tiket.Show();
             this.Hide();
         }
-        
+
+        private void btnPelanggan_Click(object sender, EventArgs e)
+        {
+            DaftarPelanggan daftarPelanggan = new DaftarPelanggan();
+            daftarPelanggan.Show();
+            this.Hide();
+        }
     }
 }

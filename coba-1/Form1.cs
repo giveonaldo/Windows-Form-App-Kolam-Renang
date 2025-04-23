@@ -86,10 +86,5 @@ namespace coba_1
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

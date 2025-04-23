@@ -40,5 +40,21 @@ namespace coba_1
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnTransaksi_Click(object sender, EventArgs e)
+        {
+            // Pindah ke form transaksi
+            Form3 form3 = new Form3();
+            form3.Show();
+            this.Hide();
+        }
+
+        private void btnTambah_Click(object sender, EventArgs e)
+        {
+            // Pindah ke form tambah tiket
+            KelolaTiket kelolaTiket = new KelolaTiket();
+            kelolaTiket.Show();
+            this.Hide();
+        }
     }
 }
