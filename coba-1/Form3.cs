@@ -40,15 +40,6 @@ namespace coba_1
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form3_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnTiket_Click(object sender, EventArgs e)
         {
@@ -56,5 +47,6 @@ namespace coba_1
             tiket.Show();
             this.Hide();
         }
+        
     }
 }

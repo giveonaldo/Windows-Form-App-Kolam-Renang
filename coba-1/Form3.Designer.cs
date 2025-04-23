@@ -37,43 +37,49 @@
             // dgvTable
             // 
             this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTable.Location = new System.Drawing.Point(64, 97);
+            this.dgvTable.Location = new System.Drawing.Point(48, 79);
+            this.dgvTable.Margin = new System.Windows.Forms.Padding(2);
             this.dgvTable.Name = "dgvTable";
             this.dgvTable.RowHeadersWidth = 51;
             this.dgvTable.RowTemplate.Height = 24;
-            this.dgvTable.Size = new System.Drawing.Size(883, 309);
+            this.dgvTable.Size = new System.Drawing.Size(662, 251);
             this.dgvTable.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(61, 45);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(44, 25);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 16);
+            this.label1.Size = new System.Drawing.Size(158, 24);
             this.label1.TabIndex = 1;
             this.label1.Text = "Daftar Transaksi";
             // 
             // btnTiket
             // 
-            this.btnTiket.Location = new System.Drawing.Point(1081, 97);
+            this.btnTiket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnTiket.Font = new System.Drawing.Font("Futura-Condensed-Thin", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTiket.Location = new System.Drawing.Point(785, 79);
+            this.btnTiket.Margin = new System.Windows.Forms.Padding(2);
             this.btnTiket.Name = "btnTiket";
-            this.btnTiket.Size = new System.Drawing.Size(75, 23);
+            this.btnTiket.Size = new System.Drawing.Size(113, 45);
             this.btnTiket.TabIndex = 2;
-            this.btnTiket.Text = "Tiket";
-            this.btnTiket.UseVisualStyleBackColor = true;
+            this.btnTiket.Text = "Daftar Tiket";
+            this.btnTiket.UseVisualStyleBackColor = false;
             this.btnTiket.Click += new System.EventHandler(this.btnTiket_Click);
             // 
             // Form3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1255, 450);
+            this.ClientSize = new System.Drawing.Size(941, 366);
             this.Controls.Add(this.btnTiket);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvTable);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form3";
             this.Text = "Form3";
-            this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

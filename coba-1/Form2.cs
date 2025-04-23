@@ -111,13 +111,7 @@ namespace coba_1
                     MessageBox.Show("Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            return -1; // Return -1 if PelangganID could not be retrieved
-        }
-
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
+            return -1;
         }
 
         private void dgvTable_CellContentClick(object sender, DataGridViewCellEventArgs e)

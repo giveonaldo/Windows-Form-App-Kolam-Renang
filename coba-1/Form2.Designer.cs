@@ -91,7 +91,6 @@
             this.Controls.Add(this.lblHeading);
             this.Name = "Form2";
             this.Text = "Tiket Kolam Renang";
-            this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
