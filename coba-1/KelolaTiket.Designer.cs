@@ -28,58 +28,58 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.dgvKelolaTiket = new System.Windows.Forms.DataGridView();
+            this.txtJenisTiket = new System.Windows.Forms.TextBox();
+            this.txtHarga = new System.Windows.Forms.TextBox();
+            this.txtDurasi = new System.Windows.Forms.TextBox();
+            this.lblJenisTiket = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnTambah = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKelolaTiket)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvKelolaTiket
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(22, 21);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(662, 228);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvKelolaTiket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvKelolaTiket.Location = new System.Drawing.Point(22, 21);
+            this.dgvKelolaTiket.Name = "dgvKelolaTiket";
+            this.dgvKelolaTiket.RowHeadersWidth = 51;
+            this.dgvKelolaTiket.RowTemplate.Height = 24;
+            this.dgvKelolaTiket.Size = new System.Drawing.Size(662, 228);
+            this.dgvKelolaTiket.TabIndex = 0;
             // 
-            // textBox1
+            // txtJenisTiket
             // 
-            this.textBox1.Location = new System.Drawing.Point(32, 296);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(311, 22);
-            this.textBox1.TabIndex = 1;
+            this.txtJenisTiket.Location = new System.Drawing.Point(32, 296);
+            this.txtJenisTiket.Name = "txtJenisTiket";
+            this.txtJenisTiket.Size = new System.Drawing.Size(311, 22);
+            this.txtJenisTiket.TabIndex = 1;
             // 
-            // textBox2
+            // txtHarga
             // 
-            this.textBox2.Location = new System.Drawing.Point(32, 365);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(311, 22);
-            this.textBox2.TabIndex = 2;
+            this.txtHarga.Location = new System.Drawing.Point(32, 365);
+            this.txtHarga.Name = "txtHarga";
+            this.txtHarga.Size = new System.Drawing.Size(311, 22);
+            this.txtHarga.TabIndex = 2;
             // 
-            // textBox3
+            // txtDurasi
             // 
-            this.textBox3.Location = new System.Drawing.Point(32, 434);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(311, 22);
-            this.textBox3.TabIndex = 3;
+            this.txtDurasi.Location = new System.Drawing.Point(32, 434);
+            this.txtDurasi.Name = "txtDurasi";
+            this.txtDurasi.Size = new System.Drawing.Size(311, 22);
+            this.txtDurasi.TabIndex = 3;
             // 
-            // label1
+            // lblJenisTiket
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 277);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 16);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Jenis Tiket";
+            this.lblJenisTiket.AutoSize = true;
+            this.lblJenisTiket.Location = new System.Drawing.Point(29, 277);
+            this.lblJenisTiket.Name = "lblJenisTiket";
+            this.lblJenisTiket.Size = new System.Drawing.Size(72, 16);
+            this.lblJenisTiket.TabIndex = 4;
+            this.lblJenisTiket.Text = "Jenis Tiket";
             // 
             // label2
             // 
@@ -98,7 +98,6 @@
             this.label3.Size = new System.Drawing.Size(46, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "Durasi";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // btnTambah
             // 
@@ -110,6 +109,7 @@
             this.btnTambah.TabIndex = 7;
             this.btnTambah.Text = "Tambah";
             this.btnTambah.UseVisualStyleBackColor = false;
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
             // 
             // btnUpdate
             // 
@@ -141,14 +141,14 @@
             this.Controls.Add(this.btnTambah);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.lblJenisTiket);
+            this.Controls.Add(this.txtDurasi);
+            this.Controls.Add(this.txtHarga);
+            this.Controls.Add(this.txtJenisTiket);
+            this.Controls.Add(this.dgvKelolaTiket);
             this.Name = "KelolaTiket";
             this.Text = "KelolaTiket";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKelolaTiket)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,11 +156,11 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgvKelolaTiket;
+        private System.Windows.Forms.TextBox txtJenisTiket;
+        private System.Windows.Forms.TextBox txtHarga;
+        private System.Windows.Forms.TextBox txtDurasi;
+        private System.Windows.Forms.Label lblJenisTiket;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnTambah;
