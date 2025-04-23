@@ -26,7 +26,7 @@ namespace coba_1
             try
             {
                 conn.Open();
-                string query = "SELECT * FROM tiket";
+                string query = "SELECT Jenis, Harga, Durasi FROM tiket";
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
@@ -41,17 +41,28 @@ namespace coba_1
             }
         }
 
-        private void btnPelanggan_Click(object sender, EventArgs e)
+        private void btnTransaksi_Click(object sender, EventArgs e)
         {
-
+            // Pindah ke form transaksi
+            Form3 form3 = new Form3();
+            form3.Show();
+            this.Hide();
         }
 
-        private void dgvTiket_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnTambah_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
 
         }
 
         
 
+=======
+            // Pindah ke form tambah tiket
+            KelolaTiket kelolaTiket = new KelolaTiket();
+            kelolaTiket.Show();
+            this.Hide();
+        }
+>>>>>>> 81b7390d8e513ee2ca88b95232ae3ed466ba02db
     }
 }
