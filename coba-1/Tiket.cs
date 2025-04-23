@@ -51,18 +51,10 @@ namespace coba_1
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
 
         }
 
         
 
-=======
-            // Pindah ke form tambah tiket
-            KelolaTiket kelolaTiket = new KelolaTiket();
-            kelolaTiket.Show();
-            this.Hide();
-        }
->>>>>>> 81b7390d8e513ee2ca88b95232ae3ed466ba02db
     }
 }
