@@ -46,9 +46,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHeading.AutoSize = true;
             this.lblHeading.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.lblHeading.Location = new System.Drawing.Point(182, 40);
+            this.lblHeading.Location = new System.Drawing.Point(243, 49);
+            this.lblHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHeading.Name = "lblHeading";
-            this.lblHeading.Size = new System.Drawing.Size(449, 22);
+            this.lblHeading.Size = new System.Drawing.Size(559, 29);
             this.lblHeading.TabIndex = 0;
             this.lblHeading.Text = "Selamat Datang di Kolam Renang Pacific Ocean";
             // 
@@ -56,9 +57,10 @@
             // 
             this.lblInstruction.AutoSize = true;
             this.lblInstruction.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInstruction.Location = new System.Drawing.Point(60, 96);
+            this.lblInstruction.Location = new System.Drawing.Point(80, 118);
+            this.lblInstruction.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInstruction.Name = "lblInstruction";
-            this.lblInstruction.Size = new System.Drawing.Size(401, 18);
+            this.lblInstruction.Size = new System.Drawing.Size(508, 24);
             this.lblInstruction.TabIndex = 1;
             this.lblInstruction.Text = "Isi data diri berikut, untuk dapat melakukan pemesanan tiket.";
             // 
@@ -66,9 +68,10 @@
             // 
             this.lblNama.AutoSize = true;
             this.lblNama.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNama.Location = new System.Drawing.Point(60, 137);
+            this.lblNama.Location = new System.Drawing.Point(80, 169);
+            this.lblNama.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNama.Name = "lblNama";
-            this.lblNama.Size = new System.Drawing.Size(48, 18);
+            this.lblNama.Size = new System.Drawing.Size(60, 24);
             this.lblNama.TabIndex = 2;
             this.lblNama.Text = "Nama";
             // 
@@ -78,18 +81,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNama.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNama.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtNama.Location = new System.Drawing.Point(63, 162);
+            this.txtNama.Location = new System.Drawing.Point(84, 199);
+            this.txtNama.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNama.Name = "txtNama";
-            this.txtNama.Size = new System.Drawing.Size(300, 26);
+            this.txtNama.Size = new System.Drawing.Size(399, 30);
             this.txtNama.TabIndex = 3;
             // 
             // lblNo
             // 
             this.lblNo.AutoSize = true;
             this.lblNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNo.Location = new System.Drawing.Point(60, 210);
+            this.lblNo.Location = new System.Drawing.Point(80, 258);
+            this.lblNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNo.Name = "lblNo";
-            this.lblNo.Size = new System.Drawing.Size(99, 18);
+            this.lblNo.Size = new System.Drawing.Size(124, 24);
             this.lblNo.TabIndex = 4;
             this.lblNo.Text = "No Whatsapp";
             // 
@@ -99,19 +104,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNo.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtNo.Location = new System.Drawing.Point(63, 235);
+            this.txtNo.Location = new System.Drawing.Point(84, 289);
+            this.txtNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNo.Name = "txtNo";
-            this.txtNo.Size = new System.Drawing.Size(300, 26);
+            this.txtNo.Size = new System.Drawing.Size(399, 30);
             this.txtNo.TabIndex = 5;
             // 
             // btnSubmit
             // 
             this.btnSubmit.BackColor = System.Drawing.Color.Lime;
-            this.btnSubmit.Font = new System.Drawing.Font("Futura Bk", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSubmit.Location = new System.Drawing.Point(63, 304);
+            this.btnSubmit.Location = new System.Drawing.Point(84, 374);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(142, 51);
+            this.btnSubmit.Size = new System.Drawing.Size(189, 63);
             this.btnSubmit.TabIndex = 6;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = false;
@@ -120,18 +127,19 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(455, 152);
+            this.pictureBox1.Location = new System.Drawing.Point(607, 187);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(315, 254);
+            this.pictureBox1.Size = new System.Drawing.Size(420, 313);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.txtNo);
@@ -140,8 +148,10 @@
             this.Controls.Add(this.lblNama);
             this.Controls.Add(this.lblInstruction);
             this.Controls.Add(this.lblHeading);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Kolam Renang Pacific Ocean";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
