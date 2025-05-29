@@ -34,7 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnTambah = new System.Windows.Forms.Button();
             this.btnTransaksi = new System.Windows.Forms.Button();
-            this.btnTiket = new System.Windows.Forms.Button();
+            this.btnKeluar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTiket)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,6 +68,7 @@
             this.btnPelanggan.TabIndex = 2;
             this.btnPelanggan.Text = "Daftar Pelanggan";
             this.btnPelanggan.UseVisualStyleBackColor = true;
+            this.btnPelanggan.Click += new System.EventHandler(this.btnPelanggan_Click);
             // 
             // label2
             // 
@@ -104,23 +105,25 @@
             this.btnTransaksi.UseVisualStyleBackColor = true;
             this.btnTransaksi.Click += new System.EventHandler(this.btnTransaksi_Click);
             // 
-            // btnTiket
+            // btnKeluar
             // 
-            this.btnTiket.BackColor = System.Drawing.Color.Lime;
-            this.btnTiket.Location = new System.Drawing.Point(825, 250);
-            this.btnTiket.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnTiket.Name = "btnTiket";
-            this.btnTiket.Size = new System.Drawing.Size(168, 34);
-            this.btnTiket.TabIndex = 6;
-            this.btnTiket.Text = "Daftar Tiket";
-            this.btnTiket.UseVisualStyleBackColor = false;
+            this.btnKeluar.BackColor = System.Drawing.Color.DarkOliveGreen;
+            this.btnKeluar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnKeluar.Location = new System.Drawing.Point(825, 250);
+            this.btnKeluar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnKeluar.Name = "btnKeluar";
+            this.btnKeluar.Size = new System.Drawing.Size(168, 34);
+            this.btnKeluar.TabIndex = 6;
+            this.btnKeluar.Text = "Keluar";
+            this.btnKeluar.UseVisualStyleBackColor = false;
+            this.btnKeluar.Click += new System.EventHandler(this.btnKeluar_Click);
             // 
             // Tiket
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 513);
-            this.Controls.Add(this.btnTiket);
+            this.Controls.Add(this.btnKeluar);
             this.Controls.Add(this.btnTransaksi);
             this.Controls.Add(this.btnTambah);
             this.Controls.Add(this.label2);
@@ -144,6 +147,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnTambah;
         private System.Windows.Forms.Button btnTransaksi;
-        private System.Windows.Forms.Button btnTiket;
+        private System.Windows.Forms.Button btnKeluar;
     }
 }

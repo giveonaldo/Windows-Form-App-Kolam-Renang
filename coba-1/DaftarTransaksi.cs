@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,30 +12,30 @@ using System.Windows.Forms;
 
 namespace coba_1
 {
-    public partial class DaftarPelanggan: Form
+    public partial class DaftarTransaksi : Form
     {
         string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_pacific;Integrated Security=True";
-        public DaftarPelanggan()
+        public DaftarTransaksi()
         {
             InitializeComponent();
-            LoadPelanggan();
+            LoadTransaksi();
         }
 
-        private void LoadPelanggan()
+        private void LoadTransaksi()
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    string query = "SELECT PelangganID, Nama, NoWA FROM [user]";
+                    string query = "SELECT * FROM transaksi"; // Gunakan query SQL Server
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn); // Ganti dari MySqlDataAdapter
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
 
-                    dgvPelanggan.AutoGenerateColumns = true;
-                    dgvPelanggan.DataSource = dt;
+                    dgvTable.AutoGenerateColumns = true;
+                    dgvTable.DataSource = dt;
                 }
                 catch (Exception ex)
                 {
@@ -44,19 +44,17 @@ namespace coba_1
             }
         }
 
-        private void btnTransaksi_Click(object sender, EventArgs e)
+        private void btnTiket_Click(object sender, EventArgs e)
         {
-            // Pindah ke form transaksi
-            DaftarTransaksi form3 = new DaftarTransaksi();
-            form3.Show();
+            Tiket tiket = new Tiket();
+            tiket.Show();
             this.Hide();
         }
 
-        private void btnTiket_Click(object sender, EventArgs e)
+        private void btnPelanggan_Click(object sender, EventArgs e)
         {
-            // Pindah ke form tiket
-            Tiket tiket = new Tiket();
-            tiket.Show();
+            DaftarPelanggan daftarPelanggan = new DaftarPelanggan();
+            daftarPelanggan.Show();
             this.Hide();
         }
     }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace coba_1
 {
     public partial class Tiket: Form
     {
-        static string connString = "server=localhost; database=kolam_renang_pacific; uid=root; pwd=;";
+        string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_pacific;Integrated Security=True";
         public Tiket()
         {
             InitializeComponent();
@@ -22,29 +23,31 @@ namespace coba_1
 
         private void LoadTiket()
         {
-            MySqlConnection conn = new MySqlConnection(connString);
-            try
+            using (SqlConnection conn = new SqlConnection(connString))
             {
-                conn.Open();
-                string query = "SELECT Jenis, Harga, Durasi FROM tiket";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT Jenis, Harga, Durasi FROM tiket";
 
-                dgvTiket.AutoGenerateColumns = true;
-                dgvTiket.DataSource = dt;
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    dgvTiket.AutoGenerateColumns = true;
+                    dgvTiket.DataSource = dt;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         private void btnTransaksi_Click(object sender, EventArgs e)
         {
             // Pindah ke form transaksi
-            Form3 form3 = new Form3();
+            DaftarTransaksi form3 = new DaftarTransaksi();
             form3.Show();
             this.Hide();
         }
@@ -54,6 +57,20 @@ namespace coba_1
             // Pindah ke Kelola tiket
             KelolaTiket kelolaTiket = new KelolaTiket();
             kelolaTiket.Show();
+            this.Hide();
+        }
+
+        private void btnPelanggan_Click(object sender, EventArgs e)
+        {
+            DaftarPelanggan daftarPelanggan = new DaftarPelanggan();
+            daftarPelanggan.Show();
+            this.Hide();
+        }
+
+        private void btnKeluar_Click(object sender, EventArgs e)
+        {
+            FormAdmin formAdmin = new FormAdmin();
+            formAdmin.Show();
             this.Hide();
         }
     }

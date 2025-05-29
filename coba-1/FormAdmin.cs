@@ -1,0 +1,81 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace coba_1
+{
+    public partial class FormAdmin : Form
+    {
+        string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_pacific;Integrated Security=True";
+        public FormAdmin()
+        {
+            InitializeComponent();
+        }
+
+
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            Option option = new Option();
+            option.Show();
+            this.Hide();
+        }
+
+        
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text.Trim();
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Username dan password tidak boleh kosong.");
+                return;
+            }
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = @"
+                SELECT * FROM [user]
+                WHERE Nama = @username AND NoWA = @password AND is_admin = 1
+            ";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
+
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            MessageBox.Show("Login berhasil sebagai Admin.");
+                            // Pindah ke form admin
+                            this.Hide();
+                            DaftarTransaksi form3 = new DaftarTransaksi(); // ganti sesuai nama form Anda
+                            form3.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Login gagal. Pastikan data benar dan Anda adalah Admin.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Terjadi kesalahan: " + ex.Message);
+                }
+            }
+        }
+    }
+}

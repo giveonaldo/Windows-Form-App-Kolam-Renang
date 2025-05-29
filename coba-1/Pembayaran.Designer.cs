@@ -1,6 +1,6 @@
 ﻿namespace coba_1
 {
-    partial class Form2
+    partial class Pembayaran
     {
         /// <summary>
         /// Required designer variable.

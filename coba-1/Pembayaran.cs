@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,36 +12,39 @@ using System.Windows.Forms;
 
 namespace coba_1
 {
-    public partial class Form2: Form
+    public partial class Pembayaran: Form
     {
-        
-        static string connString = "server=localhost; database=kolam_renang_pacific; uid=root; pwd=;";
 
-        public Form2()
+        string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_pacific;Integrated Security=True";
+
+        public Pembayaran()
         {
             InitializeComponent();
             LoadTiket();
         }
 
         private void LoadTiket()
-        {
-            MySqlConnection conn = new MySqlConnection(connString);
+        {          
+
+            SqlConnection conn = new SqlConnection(connString);
+
             try
             {
                 conn.Open();
                 string query = "SELECT TiketID, Jenis, Harga, Durasi FROM tiket";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn); // Ganti dari MySqlDataAdapter
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
                 dgvTable.AutoGenerateColumns = true;
                 dgvTable.DataSource = dt;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         private void btnBayar_Click(object sender, EventArgs e)
@@ -50,7 +54,7 @@ namespace coba_1
                 DataGridViewRow selectedRow = dgvTable.SelectedRows[0];
                 int tiketID = Convert.ToInt32(selectedRow.Cells["TiketID"].Value);
 
-                int pelangganID = GetLatestPelangganID();
+                int pelangganID = GetLatestPelangganID(); // Asumsikan metode ini masih Anda pakai
                 if (pelangganID == -1)
                 {
                     MessageBox.Show("Gagal mendapatkan PelangganID!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -58,14 +62,14 @@ namespace coba_1
                 }
 
                 string query = "INSERT INTO transaksi (PelangganID, TiketID, TanggalBeli) " +
-                               "VALUES (@PelangganID, @TiketID, CURRENT_TIMESTAMP)";
+                               "VALUES (@PelangganID, @TiketID, GETDATE())"; // Ganti CURRENT_TIMESTAMP jadi GETDATE()
 
-                using (MySqlConnection conn = new MySqlConnection(connString))
+                using (SqlConnection conn = new SqlConnection(connString))
                 {
                     try
                     {
                         conn.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
                         {
                             cmd.Parameters.AddWithValue("@PelangganID", pelangganID);
                             cmd.Parameters.AddWithValue("@TiketID", tiketID);
@@ -91,13 +95,14 @@ namespace coba_1
 
         private int GetLatestPelangganID()
         {
-            string query = "SELECT PelangganID FROM pelanggan ORDER BY PelangganID DESC LIMIT 1";
-            using (MySqlConnection conn = new MySqlConnection(connString))
+            string query = "SELECT TOP 1 PelangganID FROM [user] ORDER BY PelangganID DESC";
+
+            using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         object result = cmd.ExecuteScalar();
                         if (result != null)
@@ -111,6 +116,7 @@ namespace coba_1
                     MessageBox.Show("Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
             return -1;
         }
 
