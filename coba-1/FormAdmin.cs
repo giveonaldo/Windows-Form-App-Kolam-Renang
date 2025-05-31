@@ -17,6 +17,8 @@ namespace coba_1
         public FormAdmin()
         {
             InitializeComponent();
+
+            txtPassword.PasswordChar = '*';
         }
 
 
