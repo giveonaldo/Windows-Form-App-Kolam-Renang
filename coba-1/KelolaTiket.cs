@@ -28,14 +28,17 @@ namespace coba_1
                 try
                 {
                     conn.Open();
-                    string query = "SELECT TiketID, Jenis, Harga, Durasi FROM tiket";
+                    using (SqlCommand cmd = new SqlCommand("sp_GetAllTiket", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
 
-                    dgvKelolaTiket.AutoGenerateColumns = true;
-                    dgvKelolaTiket.DataSource = dt;
+                        dgvKelolaTiket.AutoGenerateColumns = true;
+                        dgvKelolaTiket.DataSource = dt;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -44,51 +47,84 @@ namespace coba_1
             }
         }
 
+
         private void btnTambah_Click(object sender, EventArgs e)
         {
+            // Validate empty fields first (client-side validation)
+            if (string.IsNullOrWhiteSpace(txtJenisTiket.Text) ||
+                string.IsNullOrWhiteSpace(txtHarga.Text) ||
+                string.IsNullOrWhiteSpace(txtDurasi.Text))
+            {
+                MessageBox.Show("Field Tidak Boleh Kosong!", "Peringatan",
+                               MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Validate numeric price
+            if (!decimal.TryParse(txtHarga.Text, out decimal harga))
+            {
+                MessageBox.Show("Harga harus berupa angka!", "Peringatan",
+                               MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
-                    if (txtJenisTiket.Text == "" || txtHarga.Text == "" || txtDurasi.Text == "")
+                    conn.Open();
+
+                    // Create command for stored procedure
+                    SqlCommand cmd = new SqlCommand("sp_InsertTicket", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Add input parameters
+                    cmd.Parameters.AddWithValue("@Jenis", txtJenisTiket.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Harga", harga);
+                    cmd.Parameters.AddWithValue("@Durasi", txtDurasi.Text.Trim());
+
+                    // Add output parameters
+                    SqlParameter resultParam = new SqlParameter("@Result", SqlDbType.Int);
+                    resultParam.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(resultParam);
+
+                    SqlParameter messageParam = new SqlParameter("@Message", SqlDbType.NVarChar, 100);
+                    messageParam.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(messageParam);
+
+                    // Execute the procedure
+                    cmd.ExecuteNonQuery();
+
+                    // Get results
+                    int result = (int)resultParam.Value;
+                    string message = messageParam.Value.ToString();
+
+                    // Show appropriate message
+                    if (result > 0)
                     {
-                        MessageBox.Show("Field Tidak Boleh Kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
+                        MessageBox.Show(message, "Informasi",
+                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Clear fields
+                        txtJenisTiket.Clear();
+                        txtHarga.Clear();
+                        txtDurasi.Clear();
+
+                        // Refresh data
+                        LoadTiket();
                     }
                     else
                     {
-                        conn.Open();
-                        string query = "INSERT INTO tiket (Jenis, Harga, Durasi) VALUES (@Jenis, @Harga, @Durasi)";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@Jenis", txtJenisTiket.Text);
-                        cmd.Parameters.AddWithValue("@Harga", txtHarga.Text);
-                        cmd.Parameters.AddWithValue("@Durasi", txtDurasi.Text);
-
-                        int result = cmd.ExecuteNonQuery();
-
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Data berhasil disimpan", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            // Clear text box
-                            txtJenisTiket.Clear();
-                            txtHarga.Clear();
-                            txtDurasi.Clear();
-
-                            LoadTiket(); // Panggil ulang data
-                        }
-                        else
-                        {
-                            MessageBox.Show("Data gagal disimpan", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
+                        MessageBox.Show(message, "Peringatan",
+                                      MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Terjadi kesalahan: {ex.Message}", "Kesalahan",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -104,11 +140,12 @@ namespace coba_1
                         {
                             string tiketID = dgvKelolaTiket.SelectedRows[0].Cells["TiketID"].Value.ToString();
                             conn.Open();
-                            string query = "DELETE FROM tiket WHERE TiketID = @tiket";
 
-                            using (SqlCommand cmd = new SqlCommand(query, conn))
+                            using (SqlCommand cmd = new SqlCommand("sp_DeleteTiket", conn))
                             {
-                                cmd.Parameters.AddWithValue("@tiket", tiketID);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@TiketID", tiketID);
+
                                 int rowsAffected = cmd.ExecuteNonQuery();
 
                                 if (rowsAffected > 0)
@@ -135,7 +172,8 @@ namespace coba_1
             }
         }
 
-      
+
+
 
         private void dgvKelolaTiket_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -155,100 +193,61 @@ namespace coba_1
         {
             if (dgvKelolaTiket.SelectedRows.Count == 0)
             {
-                MessageBox.Show(
-                    "Pilih data yang akan diubah!", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning
-                );
+                MessageBox.Show("Pilih data yang akan diubah!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (string.IsNullOrEmpty(txtJenisTiket.Text) || string.IsNullOrEmpty(txtHarga.Text) || string.IsNullOrEmpty(txtDurasi.Text))
+            {
+                MessageBox.Show("Semua field harus diisi untuk update!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show("Apakah yakin ingin mengubah data ini?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm == DialogResult.No) return;
 
             string TiketID = dgvKelolaTiket.SelectedRows[0].Cells["TiketID"].Value.ToString();
-
-            if (string.IsNullOrEmpty(txtJenisTiket.Text) && string.IsNullOrEmpty(txtHarga.Text) && string.IsNullOrEmpty(txtDurasi.Text))
-            {
-                MessageBox.Show(
-                    "Tidak ada data yang diubah!", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning
-                );
-                return;
-            }
-
-            DialogResult confirm = MessageBox.Show(
-                "Apakah yakin ingin mengubah data ini?", "Konfirmasi",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question
-            );
-
-            if (confirm == DialogResult.No)
-            {
-                return;
-            }
-
-            StringBuilder queryBuilder = new StringBuilder("UPDATE tiket SET ");
-            List<SqlParameter> parameters = new List<SqlParameter>();
-
-            if (!string.IsNullOrEmpty(txtJenisTiket.Text))
-            {
-                queryBuilder.Append("Jenis = @Jenis, ");
-                parameters.Add(new SqlParameter("@Jenis", txtJenisTiket.Text));
-            }
-
-            if (!string.IsNullOrEmpty(txtHarga.Text))
-            {
-                queryBuilder.Append("Harga = @Harga, ");
-                parameters.Add(new SqlParameter("@Harga", txtHarga.Text));
-            }
-
-            if (!string.IsNullOrEmpty(txtDurasi.Text))
-            {
-                queryBuilder.Append("Durasi = @Durasi, ");
-                parameters.Add(new SqlParameter("@Durasi", txtDurasi.Text));
-            }
-
-            // Hapus koma dan spasi terakhir
-            queryBuilder.Remove(queryBuilder.Length - 2, 2);
-
-            queryBuilder.Append(" WHERE TiketID = @TiketID");
-            parameters.Add(new SqlParameter("@TiketID", TiketID));
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(queryBuilder.ToString(), conn);
-
-                    foreach (var param in parameters)
+                    using (SqlCommand cmd = new SqlCommand("sp_UpdateTiket", conn))
                     {
-                        cmd.Parameters.Add(param);
-                    }
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
+                        cmd.Parameters.AddWithValue("@TiketID", TiketID);
+                        cmd.Parameters.AddWithValue("@Jenis", txtJenisTiket.Text);
+                        cmd.Parameters.AddWithValue("@Harga", Convert.ToDecimal(txtHarga.Text));
+                        cmd.Parameters.AddWithValue("@Durasi", Convert.ToInt32(txtDurasi.Text));
 
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show(
-                            "Data berhasil diubah", "Sukses",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information
-                        );
-                        LoadTiket();
-                    }
-                    else
-                    {
-                        MessageBox.Show(
-                            "Data tidak ditemukan atau gagal diubah!", "Kesalahan",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error
-                        );
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Data berhasil diubah", "Sukses",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadTiket();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Data tidak ditemukan atau gagal diubah!", "Kesalahan",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(
-                        "Error: " + ex.Message, "Kesalahan",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error
-                    );
+                    MessageBox.Show("Error: " + ex.Message, "Kesalahan",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
 
         private void btnBack_Click(object sender, EventArgs e)
         {
