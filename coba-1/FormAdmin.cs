@@ -30,7 +30,7 @@ namespace coba_1
             this.Hide();
         }
 
-        
+
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text.Trim();
@@ -47,29 +47,25 @@ namespace coba_1
                 try
                 {
                     conn.Open();
-                    string query = @"
-                SELECT * FROM [user]
-                WHERE Nama = @username AND NoWA = @password AND is_admin = 1
-            ";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (SqlCommand cmd = new SqlCommand("sp_AdminLogin", conn))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@password", password);
 
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        if (reader.HasRows)
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            MessageBox.Show("Login berhasil sebagai Admin.");
-                            // Pindah ke form admin
-                            this.Hide();
-                            DaftarTransaksi form3 = new DaftarTransaksi(); // ganti sesuai nama form Anda
-                            form3.Show();
-                            this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Login gagal. Pastikan data benar dan Anda adalah Admin.");
+                            if (reader.HasRows)
+                            {
+                                MessageBox.Show("Login berhasil sebagai Admin.");
+                                this.Hide();
+                                DaftarTransaksi form3 = new DaftarTransaksi(); // Ganti sesuai nama form
+                                form3.Show();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Login gagal. Pastikan data benar dan Anda adalah Admin.");
+                            }
                         }
                     }
                 }
@@ -79,5 +75,6 @@ namespace coba_1
                 }
             }
         }
+
     }
 }
