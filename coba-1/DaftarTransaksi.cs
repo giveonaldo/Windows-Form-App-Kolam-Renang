@@ -28,14 +28,17 @@ namespace coba_1
                 try
                 {
                     conn.Open();
-                    string query = "SELECT * FROM transaksi"; // Gunakan query SQL Server
+                    using (SqlCommand cmd = new SqlCommand("sp_GetAllTransaksi", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn); // Ganti dari MySqlDataAdapter
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
 
-                    dgvTable.AutoGenerateColumns = true;
-                    dgvTable.DataSource = dt;
+                        dgvTable.AutoGenerateColumns = true;
+                        dgvTable.DataSource = dt;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -43,6 +46,7 @@ namespace coba_1
                 }
             }
         }
+
 
         private void btnTiket_Click(object sender, EventArgs e)
         {
