@@ -28,14 +28,17 @@ namespace coba_1
                 try
                 {
                     conn.Open();
-                    string query = "SELECT PelangganID, Nama, NoWA FROM [user]";
+                    using (SqlCommand cmd = new SqlCommand("sp_GetAllPelanggan", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
 
-                    dgvPelanggan.AutoGenerateColumns = true;
-                    dgvPelanggan.DataSource = dt;
+                        dgvPelanggan.AutoGenerateColumns = true;
+                        dgvPelanggan.DataSource = dt;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -43,6 +46,7 @@ namespace coba_1
                 }
             }
         }
+
 
         private void btnTransaksi_Click(object sender, EventArgs e)
         {

@@ -24,28 +24,31 @@ namespace coba_1
         }
 
         private void LoadTiket()
-        {          
-
-            SqlConnection conn = new SqlConnection(connString);
-
-            try
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
             {
-                conn.Open();
-                string query = "SELECT TiketID, Jenis, Harga, Durasi FROM tiket";
+                try
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_GetAllTiket", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                SqlDataAdapter adapter = new SqlDataAdapter(query, conn); // Ganti dari MySqlDataAdapter
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
 
-                dgvTable.AutoGenerateColumns = true;
-                dgvTable.DataSource = dt;
+                        dgvTable.AutoGenerateColumns = true;
+                        dgvTable.DataSource = dt;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
         }
+
 
         private void btnBayar_Click(object sender, EventArgs e)
         {
@@ -54,23 +57,21 @@ namespace coba_1
                 DataGridViewRow selectedRow = dgvTable.SelectedRows[0];
                 int tiketID = Convert.ToInt32(selectedRow.Cells["TiketID"].Value);
 
-                int pelangganID = GetLatestPelangganID(); // Asumsikan metode ini masih Anda pakai
+                int pelangganID = GetLatestPelangganID();
                 if (pelangganID == -1)
                 {
                     MessageBox.Show("Gagal mendapatkan PelangganID!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                string query = "INSERT INTO transaksi (PelangganID, TiketID, TanggalBeli) " +
-                               "VALUES (@PelangganID, @TiketID, GETDATE())"; // Ganti CURRENT_TIMESTAMP jadi GETDATE()
-
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     try
                     {
                         conn.Open();
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        using (SqlCommand cmd = new SqlCommand("sp_InsertTransaksi", conn))
                         {
+                            cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@PelangganID", pelangganID);
                             cmd.Parameters.AddWithValue("@TiketID", tiketID);
 
@@ -95,15 +96,15 @@ namespace coba_1
 
         private int GetLatestPelangganID()
         {
-            string query = "SELECT TOP 1 PelangganID FROM [user] ORDER BY PelangganID DESC";
-
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (SqlCommand cmd = new SqlCommand("sp_GetLatestPelangganID", conn))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
                         object result = cmd.ExecuteScalar();
                         if (result != null)
                         {
@@ -119,6 +120,7 @@ namespace coba_1
 
             return -1;
         }
+
 
         private void dgvTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
