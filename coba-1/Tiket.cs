@@ -56,5 +56,21 @@ namespace coba_1
             kelolaTiket.Show();
             this.Hide();
         }
+
+        private void btnPelanggan_Click(object sender, EventArgs e)
+        {
+            {
+                DaftarPelanggan daftarPelanggan = new DaftarPelanggan();
+                daftarPelanggan.Show();
+                this.Hide();
+            }
+        }
+
+        private void btnKeluar_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Hide();
+        }
     }
 }

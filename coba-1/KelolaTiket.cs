@@ -231,5 +231,12 @@ namespace coba_1
                     );
             }
         }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            Tiket tiket = new Tiket();
+            tiket.Show();
+            this.Hide();
+        }
     }
 }

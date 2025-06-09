@@ -29,8 +29,8 @@ namespace coba_1
                 if (txtNama.Text == "Admin" && txtNo.Text == "Admin")
                 {
                     MessageBox.Show("Selamat Datang Admin", "Success", MessageBoxButtons.OK);
-                    Form3 form3 = new Form3();
-                    form3.Show();
+                    Tiket tiket = new Tiket();
+                    tiket.Show();
                     this.Hide();
                 }
                 else if (txtNama.Text == "" || txtNo.Text == "")
