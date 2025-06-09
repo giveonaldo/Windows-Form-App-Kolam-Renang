@@ -14,7 +14,7 @@ namespace coba_1
 {
     public partial class Tiket: Form
     {
-        string connString = "Data Source=DESKTOP-UMBBMDS\\MSSQLSERVER01;Initial Catalog=kolam_renang;Integrated Security=True;";
+        string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_pacific_;Integrated Security=True";
         public Tiket()
         {
             InitializeComponent();

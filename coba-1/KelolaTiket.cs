@@ -10,11 +10,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace coba_1
 {
     public partial class KelolaTiket : Form
     {
-        string connString = "Data Source=DESKTOP-UMBBMDS\\MSSQLSERVER01;Initial Catalog=kolam_renang;Integrated Security=True;";
+        string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_pacific_;Integrated Security=True";
         public KelolaTiket()
         {
             InitializeComponent();
@@ -67,6 +68,7 @@ namespace coba_1
                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -198,7 +200,9 @@ namespace coba_1
                 return;
             }
 
-            if (string.IsNullOrEmpty(txtJenisTiket.Text) || string.IsNullOrEmpty(txtHarga.Text) || string.IsNullOrEmpty(txtDurasi.Text))
+            if (string.IsNullOrWhiteSpace(txtJenisTiket.Text) ||
+                string.IsNullOrWhiteSpace(txtHarga.Text) ||
+                string.IsNullOrWhiteSpace(txtDurasi.Text))
             {
                 MessageBox.Show("Semua field harus diisi untuk update!", "Peringatan",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -211,6 +215,14 @@ namespace coba_1
 
             string TiketID = dgvKelolaTiket.SelectedRows[0].Cells["TiketID"].Value.ToString();
 
+            // Validasi harga
+            if (!decimal.TryParse(txtHarga.Text.Trim(), out decimal harga))
+            {
+                MessageBox.Show("Format harga tidak valid!", "Kesalahan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
@@ -221,9 +233,9 @@ namespace coba_1
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@TiketID", TiketID);
-                        cmd.Parameters.AddWithValue("@Jenis", txtJenisTiket.Text);
-                        cmd.Parameters.AddWithValue("@Harga", Convert.ToDecimal(txtHarga.Text));
-                        cmd.Parameters.AddWithValue("@Durasi", Convert.ToInt32(txtDurasi.Text));
+                        cmd.Parameters.AddWithValue("@Jenis", txtJenisTiket.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Harga", harga);
+                        cmd.Parameters.AddWithValue("@Durasi", txtDurasi.Text.Trim()); // Sudah teks, bukan int
 
                         int rowsAffected = cmd.ExecuteNonQuery();
 

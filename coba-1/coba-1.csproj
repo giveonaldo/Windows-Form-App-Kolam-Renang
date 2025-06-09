@@ -57,6 +57,9 @@
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WinForms.v12.12.0.0.1\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=9.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.9.2.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
@@ -119,6 +122,11 @@
     <Compile Include="LoginRegisterUser.Designer.cs">
       <DependentUpon>LoginRegisterUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="PelangganDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PelangganDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Pembayaran.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +159,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportDaftarPelanggan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportDaftarPelanggan.Designer.cs">
+      <DependentUpon>ReportDaftarPelanggan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tiket.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +177,7 @@
     <EmbeddedResource Include="LoginRegisterUser.resx">
       <DependentUpon>LoginRegisterUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PelangganReport.rdlc" />
     <EmbeddedResource Include="Pembayaran.resx">
       <DependentUpon>Pembayaran.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,10 +202,24 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportDaftarPelanggan.resx">
+      <DependentUpon>ReportDaftarPelanggan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tiket.resx">
       <DependentUpon>Tiket.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="PelangganDataSet.xsc">
+      <DependentUpon>PelangganDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="PelangganDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PelangganDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PelangganDataSet.xss">
+      <DependentUpon>PelangganDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
