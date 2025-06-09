@@ -109,10 +109,17 @@
             // 
             this.btnKeluar.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.btnKeluar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+<<<<<<< HEAD
             this.btnKeluar.Location = new System.Drawing.Point(928, 312);
             this.btnKeluar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnKeluar.Name = "btnKeluar";
             this.btnKeluar.Size = new System.Drawing.Size(189, 42);
+=======
+            this.btnKeluar.Location = new System.Drawing.Point(825, 250);
+            this.btnKeluar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnKeluar.Name = "btnKeluar";
+            this.btnKeluar.Size = new System.Drawing.Size(168, 34);
+>>>>>>> b00702efedaffa67fdfb608e5b90d864df2933fa
             this.btnKeluar.TabIndex = 6;
             this.btnKeluar.Text = "Keluar";
             this.btnKeluar.UseVisualStyleBackColor = false;
@@ -122,7 +129,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(1197, 641);
+=======
+            this.ClientSize = new System.Drawing.Size(1064, 513);
+>>>>>>> b00702efedaffa67fdfb608e5b90d864df2933fa
             this.Controls.Add(this.btnKeluar);
             this.Controls.Add(this.btnTransaksi);
             this.Controls.Add(this.btnTambah);

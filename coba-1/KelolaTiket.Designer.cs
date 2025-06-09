@@ -38,7 +38,10 @@
             this.btnTambah = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+<<<<<<< HEAD
             this.button1 = new System.Windows.Forms.Button();
+=======
+>>>>>>> b00702efedaffa67fdfb608e5b90d864df2933fa
             this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKelolaTiket)).BeginInit();
             this.SuspendLayout();
@@ -143,6 +146,7 @@
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+<<<<<<< HEAD
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(0, 0);
@@ -158,6 +162,14 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(89, 27);
             this.btnBack.TabIndex = 11;
+=======
+            // btnBack
+            // 
+            this.btnBack.Location = new System.Drawing.Point(50, 504);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(75, 23);
+            this.btnBack.TabIndex = 10;
+>>>>>>> b00702efedaffa67fdfb608e5b90d864df2933fa
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -166,9 +178,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(801, 684);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.button1);
+=======
+            this.ClientSize = new System.Drawing.Size(712, 547);
+            this.Controls.Add(this.btnBack);
+>>>>>>> b00702efedaffa67fdfb608e5b90d864df2933fa
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnTambah);
@@ -200,7 +217,10 @@
         private System.Windows.Forms.Button btnTambah;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
+<<<<<<< HEAD
         private System.Windows.Forms.Button button1;
+=======
+>>>>>>> b00702efedaffa67fdfb608e5b90d864df2933fa
         private System.Windows.Forms.Button btnBack;
     }
 }

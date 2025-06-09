@@ -110,35 +110,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Daftar pelanggan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Daftar pelanggan.Designer.cs">
-      <DependentUpon>Daftar pelanggan.cs</DependentUpon>
-    </Compile>
     <Compile Include="DaftarPelanggan.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DaftarPelanggan.Designer.cs">
       <DependentUpon>DaftarPelanggan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="LoginRegisterUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="LoginRegisterUser.Designer.cs">
+      <DependentUpon>LoginRegisterUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="PelangganDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PelangganDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Pembayaran.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="Pembayaran.Designer.cs">
+      <DependentUpon>Pembayaran.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="DaftarTransaksi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="DaftarTransaksi.Designer.cs">
+      <DependentUpon>DaftarTransaksi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdmin.Designer.cs">
+      <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="KelolaTiket.cs">
       <SubType>Form</SubType>
@@ -146,44 +151,47 @@
     <Compile Include="KelolaTiket.Designer.cs">
       <DependentUpon>KelolaTiket.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pelanggandataset.cs">
-      <DependentUpon>Pelanggandataset.xsd</DependentUpon>
+    <Compile Include="Option.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pelanggandataset.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Pelanggandataset.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="PelangganDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PelangganDataSet1.xsd</DependentUpon>
+    <Compile Include="Option.Designer.cs">
+      <DependentUpon>Option.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportDaftarPelanggan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportDaftarPelanggan.Designer.cs">
+      <DependentUpon>ReportDaftarPelanggan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tiket.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Tiket.Designer.cs">
       <DependentUpon>Tiket.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Daftar pelanggan.resx">
-      <DependentUpon>Daftar pelanggan.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DaftarPelanggan.resx">
       <DependentUpon>DaftarPelanggan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="LoginRegisterUser.resx">
+      <DependentUpon>LoginRegisterUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="PelangganReport.rdlc" />
+    <EmbeddedResource Include="Pembayaran.resx">
+      <DependentUpon>Pembayaran.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="DaftarTransaksi.resx">
+      <DependentUpon>DaftarTransaksi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAdmin.resx">
+      <DependentUpon>FormAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KelolaTiket.resx">
       <DependentUpon>KelolaTiket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Option.resx">
+      <DependentUpon>Option.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -194,31 +202,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportDaftarPelanggan.resx">
+      <DependentUpon>ReportDaftarPelanggan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tiket.resx">
       <DependentUpon>Tiket.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Pelanggandataset.xsc">
-      <DependentUpon>Pelanggandataset.xsd</DependentUpon>
+    <None Include="PelangganDataSet.xsc">
+      <DependentUpon>PelangganDataSet.xsd</DependentUpon>
     </None>
-    <None Include="Pelanggandataset.xsd">
+    <None Include="PelangganDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Pelanggandataset.Designer.cs</LastGenOutput>
+      <LastGenOutput>PelangganDataSet.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Pelanggandataset.xss">
-      <DependentUpon>Pelanggandataset.xsd</DependentUpon>
-    </None>
-    <None Include="PelangganDataSet1.xsc">
-      <DependentUpon>PelangganDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="PelangganDataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PelangganDataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="PelangganDataSet1.xss">
-      <DependentUpon>PelangganDataSet1.xsd</DependentUpon>
+    <None Include="PelangganDataSet.xss">
+      <DependentUpon>PelangganDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

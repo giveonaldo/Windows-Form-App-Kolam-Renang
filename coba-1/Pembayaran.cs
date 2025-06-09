@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,12 +12,12 @@ using System.Windows.Forms;
 
 namespace coba_1
 {
-    public partial class Form2: Form
+    public partial class Pembayaran: Form
     {
-        
-        static string connString = "server=localhost; database=kolam_renang_pacific; uid=root; pwd=;";
 
-        public Form2()
+        string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_pacific_;Integrated Security=True";
+
+        public Pembayaran()
         {
             InitializeComponent();
             LoadTiket();
@@ -24,24 +25,30 @@ namespace coba_1
 
         private void LoadTiket()
         {
-            MySqlConnection conn = new MySqlConnection(connString);
-            try
+            using (SqlConnection conn = new SqlConnection(connString))
             {
-                conn.Open();
-                string query = "SELECT TiketID, Jenis, Harga, Durasi FROM tiket";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
+                try
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_GetAllTiket", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                dgvTable.AutoGenerateColumns = true;
-                dgvTable.DataSource = dt;
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dgvTable.AutoGenerateColumns = true;
+                        dgvTable.DataSource = dt;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
 
         private void btnBayar_Click(object sender, EventArgs e)
         {
@@ -57,16 +64,14 @@ namespace coba_1
                     return;
                 }
 
-                string query = "INSERT INTO transaksi (PelangganID, TiketID, TanggalBeli) " +
-                               "VALUES (@PelangganID, @TiketID, CURRENT_TIMESTAMP)";
-
-                using (MySqlConnection conn = new MySqlConnection(connString))
+                using (SqlConnection conn = new SqlConnection(connString))
                 {
                     try
                     {
                         conn.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                        using (SqlCommand cmd = new SqlCommand("sp_InsertTransaksi", conn))
                         {
+                            cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@PelangganID", pelangganID);
                             cmd.Parameters.AddWithValue("@TiketID", tiketID);
 
@@ -91,14 +96,15 @@ namespace coba_1
 
         private int GetLatestPelangganID()
         {
-            string query = "SELECT PelangganID FROM pelanggan ORDER BY PelangganID DESC LIMIT 1";
-            using (MySqlConnection conn = new MySqlConnection(connString))
+            using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    using (SqlCommand cmd = new SqlCommand("sp_GetLatestPelangganID", conn))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
                         object result = cmd.ExecuteScalar();
                         if (result != null)
                         {
@@ -111,8 +117,10 @@ namespace coba_1
                     MessageBox.Show("Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
             return -1;
         }
+
 
         private void dgvTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
