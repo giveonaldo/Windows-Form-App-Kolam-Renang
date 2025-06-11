@@ -79,7 +79,10 @@ namespace coba_1
                         }
 
                         MessageBox.Show("Transaksi berhasil disimpan!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Application.Exit();
+                        LoginRegisterUser loginRegisterUser = new LoginRegisterUser();
+                        loginRegisterUser.Show();
+                        this.Hide();
+                        
                     }
                     catch (Exception ex)
                     {
