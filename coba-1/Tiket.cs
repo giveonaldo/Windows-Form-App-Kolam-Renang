@@ -48,10 +48,6 @@ namespace coba_1
                         dgvTiket.Columns.Add("Jenis", "Jenis Tiket");
                         dgvTiket.Columns.Add("Harga", "Harga");
                         dgvTiket.Columns.Add("Durasi", "Durasi");
-
-                        // Format the price column
-                        dgvTiket.Columns["Harga"].DefaultCellStyle.Format = "N0";
-                        dgvTiket.Columns["Harga"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     }
                 }
                 catch (Exception ex)

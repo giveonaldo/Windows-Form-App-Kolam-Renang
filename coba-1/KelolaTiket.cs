@@ -9,12 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.Caching;
+
 
 namespace coba_1
 {
     public partial class KelolaTiket : Form
     {
         string connString = "Data Source=DESKTOP-UMBBMDS\\MSSQLSERVER01;Initial Catalog=kolam_renang;Integrated Security=True;";
+
+        private MemoryCache cache = MemoryCache.Default;
+
         public KelolaTiket()
         {
             InitializeComponent();
@@ -23,28 +28,40 @@ namespace coba_1
 
         private void LoadTiket()
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            string cacheKey = "AllTiket";
+            DataTable dt = cache.Get(cacheKey) as DataTable;
+
+            if (dt == null)
             {
-                try
+                using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("sp_GetAllTiket", conn))
+                    try
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
+                        conn.Open();
+                        using (SqlCommand cmd = new SqlCommand("sp_GetAllTiket", conn))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
 
-                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
+                            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                            dt = new DataTable();
+                            adapter.Fill(dt);
 
-                        dgvKelolaTiket.AutoGenerateColumns = true;
-                        dgvKelolaTiket.DataSource = dt;
+                            // Simpan ke cache selama 10 menit
+                            cache.Set(cacheKey, dt, DateTimeOffset.Now.AddMinutes(10));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Terjadi kesalahan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
+            dgvKelolaTiket.Invoke((MethodInvoker)(() =>
+            {
+                dgvKelolaTiket.AutoGenerateColumns = true;
+                dgvKelolaTiket.DataSource = dt;
+            }));
         }
 
 
@@ -172,9 +189,6 @@ namespace coba_1
             }
         }
 
-
-
-
         private void dgvKelolaTiket_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -222,8 +236,8 @@ namespace coba_1
 
                         cmd.Parameters.AddWithValue("@TiketID", TiketID);
                         cmd.Parameters.AddWithValue("@Jenis", txtJenisTiket.Text);
-                        cmd.Parameters.AddWithValue("@Harga", Convert.ToDecimal(txtHarga.Text));
-                        cmd.Parameters.AddWithValue("@Durasi", Convert.ToInt32(txtDurasi.Text));
+                        cmd.Parameters.AddWithValue("@Harga", txtHarga.Text);
+                        cmd.Parameters.AddWithValue("@Durasi", txtDurasi.Text);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
 
