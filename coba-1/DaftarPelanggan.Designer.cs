@@ -118,6 +118,7 @@
             this.btnImport.TabIndex = 6;
             this.btnImport.Text = "Import";
             this.btnImport.UseVisualStyleBackColor = false;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // DaftarPelanggan
             // 

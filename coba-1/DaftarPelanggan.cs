@@ -5,10 +5,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 
 namespace coba_1
 {
@@ -112,6 +115,56 @@ namespace coba_1
                 string noWA = row.Cells["NoWA"].Value.ToString();
                 string createdAt = row.Cells["CreatedAt"].Value.ToString();
             }
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            using (var openFile = new OpenFileDialog())
+            {
+                openFile.Filter = "Excel Files|*.xlsx;*.xlsm";
+                if (openFile.ShowDialog() == DialogResult.OK)
+                    PreviewData(openFile.FileName);         
+            }
+        }
+
+        private void PreviewData(string filePath)
+        {
+            try
+            {
+                using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    IWorkbook workbook = new XSSFWorkbook(fs);
+                    ISheet sheet = workbook.GetSheetAt(0);
+                    DataTable dt = new DataTable();
+
+                    // Header kolom
+                    IRow headerRow = sheet.GetRow(0);
+                    foreach (var cell in headerRow.Cells)
+                        dt.Columns.Add(cell.ToString());
+
+                    // Baris data
+                    for (int i = 1; i <= sheet.LastRowNum; i++)
+                    {
+                        IRow dataRow = sheet.GetRow(i);
+                        DataRow newRow = dt.NewRow();
+                        int cellIndex = 0;
+                        foreach (var cell in dataRow.Cells)
+                        {
+                            newRow[cellIndex++] = cell.ToString();
+                        }
+                        dt.Rows.Add(newRow);
+                    }
+
+                    
+                    PreviewImport previewImport = new PreviewImport(dt);
+                    previewImport.ShowDialog(); 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error reading the Excel file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }

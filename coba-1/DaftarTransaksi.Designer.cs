@@ -74,7 +74,7 @@
             // 
             this.btnPelanggan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnPelanggan.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPelanggan.Location = new System.Drawing.Point(995, 196);
+            this.btnPelanggan.Location = new System.Drawing.Point(995, 187);
             this.btnPelanggan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPelanggan.Name = "btnPelanggan";
             this.btnPelanggan.Size = new System.Drawing.Size(225, 55);
