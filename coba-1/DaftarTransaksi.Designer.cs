@@ -61,10 +61,10 @@
             // 
             this.btnTiket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnTiket.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTiket.Location = new System.Drawing.Point(1047, 97);
+            this.btnTiket.Location = new System.Drawing.Point(995, 97);
             this.btnTiket.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTiket.Name = "btnTiket";
-            this.btnTiket.Size = new System.Drawing.Size(173, 55);
+            this.btnTiket.Size = new System.Drawing.Size(225, 55);
             this.btnTiket.TabIndex = 2;
             this.btnTiket.Text = "Daftar Tiket";
             this.btnTiket.UseVisualStyleBackColor = false;
@@ -74,10 +74,10 @@
             // 
             this.btnPelanggan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnPelanggan.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPelanggan.Location = new System.Drawing.Point(1047, 196);
+            this.btnPelanggan.Location = new System.Drawing.Point(995, 196);
             this.btnPelanggan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPelanggan.Name = "btnPelanggan";
-            this.btnPelanggan.Size = new System.Drawing.Size(173, 55);
+            this.btnPelanggan.Size = new System.Drawing.Size(225, 55);
             this.btnPelanggan.TabIndex = 3;
             this.btnPelanggan.Text = "Daftar Pelanggan";
             this.btnPelanggan.UseVisualStyleBackColor = false;
@@ -87,10 +87,10 @@
             // 
             this.btnReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReport.Location = new System.Drawing.Point(1047, 276);
+            this.btnReport.Location = new System.Drawing.Point(995, 276);
             this.btnReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(173, 55);
+            this.btnReport.Size = new System.Drawing.Size(225, 55);
             this.btnReport.TabIndex = 4;
             this.btnReport.Text = "Report";
             this.btnReport.UseVisualStyleBackColor = false;
@@ -100,6 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1255, 450);
             this.Controls.Add(this.btnReport);
             this.Controls.Add(this.btnPelanggan);

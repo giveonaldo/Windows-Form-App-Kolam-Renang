@@ -41,9 +41,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHeading.AutoSize = true;
             this.lblHeading.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.lblHeading.Location = new System.Drawing.Point(182, 36);
+            this.lblHeading.Location = new System.Drawing.Point(243, 44);
+            this.lblHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHeading.Name = "lblHeading";
-            this.lblHeading.Size = new System.Drawing.Size(449, 22);
+            this.lblHeading.Size = new System.Drawing.Size(559, 29);
             this.lblHeading.TabIndex = 1;
             this.lblHeading.Text = "Selamat Datang di Kolam Renang Pacific Ocean";
             // 
@@ -51,20 +52,22 @@
             // 
             this.lblInstruction.AutoSize = true;
             this.lblInstruction.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInstruction.Location = new System.Drawing.Point(299, 79);
+            this.lblInstruction.Location = new System.Drawing.Point(399, 97);
+            this.lblInstruction.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInstruction.Name = "lblInstruction";
-            this.lblInstruction.Size = new System.Drawing.Size(199, 18);
+            this.lblInstruction.Size = new System.Drawing.Size(256, 24);
             this.lblInstruction.TabIndex = 2;
             this.lblInstruction.Text = "Pilih tiket yang anda inginkan.";
             // 
             // btnBayar
             // 
             this.btnBayar.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnBayar.Font = new System.Drawing.Font("a_FuturaOrto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnBayar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnBayar.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnBayar.Location = new System.Drawing.Point(323, 357);
+            this.btnBayar.Location = new System.Drawing.Point(431, 439);
+            this.btnBayar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBayar.Name = "btnBayar";
-            this.btnBayar.Size = new System.Drawing.Size(153, 47);
+            this.btnBayar.Size = new System.Drawing.Size(204, 58);
             this.btnBayar.TabIndex = 5;
             this.btnBayar.Text = "Bayar";
             this.btnBayar.UseVisualStyleBackColor = false;
@@ -74,22 +77,25 @@
             // 
             this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTable.GridColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dgvTable.Location = new System.Drawing.Point(173, 140);
+            this.dgvTable.Location = new System.Drawing.Point(209, 167);
+            this.dgvTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvTable.Name = "dgvTable";
-            this.dgvTable.Size = new System.Drawing.Size(467, 184);
+            this.dgvTable.RowHeadersWidth = 51;
+            this.dgvTable.Size = new System.Drawing.Size(623, 226);
             this.dgvTable.TabIndex = 6;
             this.dgvTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTable_CellContentClick);
             // 
-            // Form2
+            // Pembayaran
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.dgvTable);
             this.Controls.Add(this.btnBayar);
             this.Controls.Add(this.lblInstruction);
             this.Controls.Add(this.lblHeading);
-            this.Name = "Form2";
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "Pembayaran";
             this.Text = "Tiket Kolam Renang";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
             this.ResumeLayout(false);
