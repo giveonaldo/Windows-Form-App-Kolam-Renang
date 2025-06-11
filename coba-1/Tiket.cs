@@ -28,34 +28,21 @@ namespace coba_1
                 try
                 {
                     conn.Open();
-
-                    // Use the stored procedure instead of raw SQL
-                    SqlCommand cmd = new SqlCommand("sp_GetAllTickets", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-
-                    // Configure DataGridView
-                    dgvTiket.AutoGenerateColumns = false;  // Better to set to false and define columns manually
-                    dgvTiket.DataSource = dt;
-
-                    // Optional: Format columns if needed
-                    if (dgvTiket.Columns.Count == 0)
+                    using (SqlCommand cmd = new SqlCommand("sp_GetAllTiket", conn))
                     {
-                        dgvTiket.Columns.Add("TiketID", "ID Tiket");
-                        dgvTiket.Columns.Add("Jenis", "Jenis Tiket");
-                        dgvTiket.Columns.Add("Harga", "Harga");
-                        dgvTiket.Columns.Add("Durasi", "Durasi");
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+
+                        dgvTiket.AutoGenerateColumns = true;
+                        dgvTiket.DataSource = dt;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error loading ticket data: {ex.Message}",
-                                  "Error",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

@@ -28,40 +28,28 @@ namespace coba_1
 
         private void LoadTiket()
         {
-            string cacheKey = "AllTiket";
-            DataTable dt = cache.Get(cacheKey) as DataTable;
-
-            if (dt == null)
+            using (SqlConnection conn = new SqlConnection(connString))
             {
-                using (SqlConnection conn = new SqlConnection(connString))
+                try
                 {
-                    try
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_GetAllTiket", conn))
                     {
-                        conn.Open();
-                        using (SqlCommand cmd = new SqlCommand("sp_GetAllTiket", conn))
-                        {
-                            cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                            dt = new DataTable();
-                            adapter.Fill(dt);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
 
-                            // Simpan ke cache selama 10 menit
-                            cache.Set(cacheKey, dt, DateTimeOffset.Now.AddMinutes(10));
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Terjadi kesalahan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        dgvKelolaTiket.AutoGenerateColumns = true;
+                        dgvKelolaTiket.DataSource = dt;
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            dgvKelolaTiket.Invoke((MethodInvoker)(() =>
-            {
-                dgvKelolaTiket.AutoGenerateColumns = true;
-                dgvKelolaTiket.DataSource = dt;
-            }));
         }
 
 

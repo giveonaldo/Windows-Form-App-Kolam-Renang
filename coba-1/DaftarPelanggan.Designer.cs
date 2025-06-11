@@ -33,6 +33,7 @@
             this.dgvPelanggan = new System.Windows.Forms.DataGridView();
             this.btnTransaksi = new System.Windows.Forms.Button();
             this.btnTiket = new System.Windows.Forms.Button();
+            this.btnHapus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPelanggan)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +63,7 @@
             this.dgvPelanggan.Name = "dgvPelanggan";
             this.dgvPelanggan.Size = new System.Drawing.Size(529, 310);
             this.dgvPelanggan.TabIndex = 2;
+            this.dgvPelanggan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPelanggan_CellContentClick);
             // 
             // btnTransaksi
             // 
@@ -83,11 +85,25 @@
             this.btnTiket.UseVisualStyleBackColor = true;
             this.btnTiket.Click += new System.EventHandler(this.btnTiket_Click);
             // 
+            // btnHapus
+            // 
+            this.btnHapus.BackColor = System.Drawing.Color.IndianRed;
+            this.btnHapus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHapus.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnHapus.Location = new System.Drawing.Point(654, 243);
+            this.btnHapus.Name = "btnHapus";
+            this.btnHapus.Size = new System.Drawing.Size(119, 38);
+            this.btnHapus.TabIndex = 5;
+            this.btnHapus.Text = "Hapus Pelanggan";
+            this.btnHapus.UseVisualStyleBackColor = false;
+            this.btnHapus.Click += new System.EventHandler(this.btnHapus_Click);
+            // 
             // DaftarPelanggan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnHapus);
             this.Controls.Add(this.btnTiket);
             this.Controls.Add(this.btnTransaksi);
             this.Controls.Add(this.dgvPelanggan);
@@ -108,5 +124,6 @@
         private System.Windows.Forms.DataGridView dgvPelanggan;
         private System.Windows.Forms.Button btnTransaksi;
         private System.Windows.Forms.Button btnTiket;
+        private System.Windows.Forms.Button btnHapus;
     }
 }
