@@ -28,44 +28,43 @@ namespace coba_1
 
         private void SetupReportViewer()
         {
-            // Connection string to your database
-            string connectionString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_pacific_;Integrated Security=True";
+            // Connection string ke database
+            string connectionString = "Data Source=DESKTOP-UMBBMDS\\MSSQLSERVER01;Initial Catalog=kolam_renang;Integrated Security=True;";
 
-            // SQL query to retrieve the required data from the database
-            string query = @"
-        SELECT
-            TransaksiID,
-            PelangganID,
-            TiketID,
-            TanggalBeli,
-            MetodePembayaran,
-            Status
-        FROM
-            transaksi";
+            // Nama stored procedure
+            string storedProcedureName = "sp_GetTransaksiReport";
 
-            // Create a DataTable to store the data
+            // Membuat DataTable untuk menampung data
             DataTable dt = new DataTable();
 
-            // Use SqlDataAdapter to fill the DataTable with data from the database
+            // Menggunakan SqlDataAdapter untuk memanggil stored procedure dan mengisi DataTable
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                da.Fill(dt);
-            }
-            // Create a ReportDataSource
-            ReportDataSource rds = new ReportDataSource("transaksi", dt); // Make sure "DataSet1" matches your RDLC dataset name
+                using (SqlCommand cmd = new SqlCommand(storedProcedureName, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-            // Clear any existing data sources and add the new data source
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+
+            // Buat ReportDataSource dan pastikan nama "transaksi" sama dengan nama dataset di RDLC
+            ReportDataSource rds = new ReportDataSource("ExportTransaksi", dt);
+
+            // Bersihkan data source lama dan tambahkan data source baru
             reportViewer1.LocalReport.DataSources.Clear();
             reportViewer1.LocalReport.DataSources.Add(rds);
 
-            // Set the path to the report (.rdlc file)
-            // Change this to the actual path of your RDLC file
-            reportViewer1.LocalReport.ReportPath = @"D:\Windows-Form-App-Kolam-Renang\coba-1\TransaksiReport.rdlc";
+            // Tentukan path ke file RDLC
+            reportViewer1.LocalReport.ReportPath = @"C:\Users\giveo\OneDrive\ドキュメント\Kuliah lagi tah\PABD\File UCP\Windows-Form-App-Kolam-Renang\coba-1\TransaksiReport.rdlc";
 
-            // Refresh the ReportViewer to show the updated report
+            // Refresh untuk menampilkan laporan
             reportViewer1.RefreshReport();
         }
+
 
         private void btnBack_Click(object sender, EventArgs e)
         {
