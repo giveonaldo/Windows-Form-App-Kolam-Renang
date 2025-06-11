@@ -13,7 +13,7 @@ namespace coba_1
 {
     public partial class FormAdmin : Form
     {
-        string connString = "Data Source=DESKTOP-UMBBMDS\\MSSQLSERVER01;Initial Catalog=kolam_renang;Integrated Security=True;";
+        string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_;Integrated Security=True";
         public FormAdmin()
         {
             InitializeComponent();

@@ -10,13 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.Caching;
+using System.Transactions;
 
 
 namespace coba_1
 {
     public partial class KelolaTiket : Form
     {
-        string connString = "Data Source=DESKTOP-UMBBMDS\\MSSQLSERVER01;Initial Catalog=kolam_renang;Integrated Security=True;";
+        string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_;Integrated Security=True";
 
         private MemoryCache cache = MemoryCache.Default;
 
@@ -62,6 +63,7 @@ namespace coba_1
             {
                 MessageBox.Show("Field Tidak Boleh Kosong!", "Peringatan",
                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lblmessage.Text = "Field Tidak Boleh Kosong!";
                 return;
             }
 
@@ -70,66 +72,63 @@ namespace coba_1
             {
                 MessageBox.Show("Harga harus berupa angka!", "Peringatan",
                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lblmessage.Text = "Harga harus berupa angka!";
                 return;
             }
 
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+
                 try
                 {
-                    conn.Open();
-
-                    // Create command for stored procedure
-                    SqlCommand cmd = new SqlCommand("sp_InsertTicket", conn);
+                    SqlCommand cmd = new SqlCommand("sp_InsertTicket", conn, transaction);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    // Add input parameters
                     cmd.Parameters.AddWithValue("@Jenis", txtJenisTiket.Text.Trim());
                     cmd.Parameters.AddWithValue("@Harga", harga);
                     cmd.Parameters.AddWithValue("@Durasi", txtDurasi.Text.Trim());
 
-                    // Add output parameters
-                    SqlParameter resultParam = new SqlParameter("@Result", SqlDbType.Int);
-                    resultParam.Direction = ParameterDirection.Output;
+                    SqlParameter resultParam = new SqlParameter("@Result", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
                     cmd.Parameters.Add(resultParam);
 
-                    SqlParameter messageParam = new SqlParameter("@Message", SqlDbType.NVarChar, 100);
-                    messageParam.Direction = ParameterDirection.Output;
+                    SqlParameter messageParam = new SqlParameter("@Message", SqlDbType.NVarChar, 100)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
                     cmd.Parameters.Add(messageParam);
 
-                    // Execute the procedure
                     cmd.ExecuteNonQuery();
+                    transaction.Commit();
 
-                    // Get results
                     int result = (int)resultParam.Value;
                     string message = messageParam.Value.ToString();
 
-                    // Show appropriate message
                     if (result > 0)
                     {
-                        MessageBox.Show(message, "Informasi",
-                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // Clear fields
+                        MessageBox.Show(message, "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtJenisTiket.Clear();
                         txtHarga.Clear();
                         txtDurasi.Clear();
-
-                        // Refresh data
                         LoadTiket();
                     }
                     else
                     {
-                        MessageBox.Show(message, "Peringatan",
-                                      MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(message, "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Terjadi kesalahan: {ex.Message}", "Kesalahan",
-                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    transaction?.Rollback();
+                    MessageBox.Show($"Transaksi gagal: {ex.Message}", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblmessage.Text = "Error: " + ex.Message;
                 }
+
             }
         }
 
@@ -142,12 +141,15 @@ namespace coba_1
                 {
                     using (SqlConnection conn = new SqlConnection(connString))
                     {
+                        conn.Open();
+                        SqlTransaction transaction = conn.BeginTransaction();
+
                         try
                         {
                             string tiketID = dgvKelolaTiket.SelectedRows[0].Cells["TiketID"].Value.ToString();
                             conn.Open();
 
-                            using (SqlCommand cmd = new SqlCommand("sp_DeleteTiket", conn))
+                            using (SqlCommand cmd = new SqlCommand("sp_DeleteTiket", conn, transaction))
                             {
                                 cmd.CommandType = CommandType.StoredProcedure;
                                 cmd.Parameters.AddWithValue("@TiketID", tiketID);
@@ -156,18 +158,24 @@ namespace coba_1
 
                                 if (rowsAffected > 0)
                                 {
+                                    transaction.Commit();
                                     MessageBox.Show("Data berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    LoadTiket(); // Refresh DataGridView
+                                    lblmessage.Text = "Data berhasil dihapus!";
+                                    LoadTiket();
                                 }
                                 else
                                 {
+                                    transaction.Rollback();
                                     MessageBox.Show("Data tidak ditemukan atau gagal dihapus!", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    lblmessage.Text = "Data tidak ditemukan atau gagal dihapus!";
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Error: " + ex.Message, "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            transaction?.Rollback();
+                            MessageBox.Show("Error saat hapus: " + ex.Message, "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            lblmessage.Text = "Error: " + ex.Message;
                         }
                     }
                 }
@@ -201,6 +209,7 @@ namespace coba_1
             {
                 MessageBox.Show("Pilih data yang akan diubah!", "Peringatan",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lblmessage.Text = "Pilih data yang akan diubah!";
                 return;
             }
 
@@ -210,6 +219,7 @@ namespace coba_1
             {
                 MessageBox.Show("Semua field harus diisi untuk update!", "Peringatan",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lblmessage.Text = "Semua field harus diisi untuk update!";
                 return;
             }
 
@@ -224,43 +234,50 @@ namespace coba_1
             {
                 MessageBox.Show("Format harga tidak valid!", "Kesalahan",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblmessage.Text = "Format harga tidak valid!";
                 return;
             }
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+
                 try
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("sp_UpdateTiket", conn))
+                    using (SqlCommand cmd = new SqlCommand("sp_UpdateTiket", conn, transaction))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@TiketID", TiketID);
                         cmd.Parameters.AddWithValue("@Jenis", txtJenisTiket.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Harga", harga);
-                        cmd.Parameters.AddWithValue("@Durasi", txtDurasi.Text.Trim()); // Sudah teks, bukan int
+                        cmd.Parameters.AddWithValue("@Harga", txtHarga.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Durasi", txtDurasi.Text.Trim());
 
                         int rowsAffected = cmd.ExecuteNonQuery();
 
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Data berhasil diubah", "Sukses",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            transaction.Commit();
+                            MessageBox.Show("Data berhasil diubah", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            lblmessage.Text = "Data berhasil diubah";
                             LoadTiket();
                         }
                         else
                         {
-                            MessageBox.Show("Data tidak ditemukan atau gagal diubah!", "Kesalahan",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            transaction.Rollback();
+                            MessageBox.Show("Data tidak ditemukan atau gagal diubah!", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            lblmessage.Text = "Data tidak ditemukan atau gagal diubah!";
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message, "Kesalahan",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    transaction?.Rollback();
+                    MessageBox.Show("Error saat update: " + ex.Message, "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblmessage.Text = "Error: " + ex.Message;
                 }
+
             }
         }
 

@@ -13,7 +13,7 @@ namespace coba_1
 {
     public partial class PreviewImport : Form
     {
-        string connectionString = "Data Source=DESKTOP-UMBBMDS\\MSSQLSERVER01;Initial Catalog=kolam_renang;Integrated Security=True;";
+        string connectionString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_;Integrated Security=True";
         public PreviewImport(DataTable data)
         {
             InitializeComponent();

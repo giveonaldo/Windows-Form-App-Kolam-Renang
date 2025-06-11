@@ -29,7 +29,7 @@ namespace coba_1
         private void SetupReportViewer()
         {
             // Connection string ke database
-            string connectionString = "Data Source=DESKTOP-UMBBMDS\\MSSQLSERVER01;Initial Catalog=kolam_renang;Integrated Security=True;";
+            string connectionString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_;Integrated Security=True";
 
             // Nama stored procedure
             string storedProcedureName = "sp_GetTransaksiReport";
@@ -59,7 +59,7 @@ namespace coba_1
             reportViewer1.LocalReport.DataSources.Add(rds);
 
             // Tentukan path ke file RDLC
-            reportViewer1.LocalReport.ReportPath = @"C:\Users\giveo\OneDrive\ドキュメント\Kuliah lagi tah\PABD\File UCP\Windows-Form-App-Kolam-Renang\coba-1\TransaksiReport.rdlc";
+            reportViewer1.LocalReport.ReportPath = @"D:\Windows-Form-App-Kolam-Renang\coba-1\TransaksiReport.rdlc";
 
             // Refresh untuk menampilkan laporan
             reportViewer1.RefreshReport();
