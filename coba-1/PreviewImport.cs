@@ -37,19 +37,25 @@ namespace coba_1
 
         private bool ValidateRow(DataRow row)
         {
-            string nowa = row["NoWA"].ToString();
+            string nowa = row["NoWA"].ToString().Trim();
 
-            
-            if (nowa.Length != 11)
+            // Cek panjang minimal dan maksimal
+            if (nowa.Length < 11 || nowa.Length > 13)
             {
-                MessageBox.Show("Nomor harus terdiri dari 11-13 Angka.", "Kesalahan Validasi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Nomor WA \"{nowa}\" harus terdiri dari 11–13 angka.", "Kesalahan Validasi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            // Jika perlu, tambahkan validasi lain sesuai dengan kebutuhan (misalnya, pola tertentu untuk NIM)
+            // Pastikan hanya angka
+            if (!nowa.All(char.IsDigit))
+            {
+                MessageBox.Show($"Nomor WA \"{nowa}\" hanya boleh berisi angka.", "Kesalahan Validasi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
             return true;
         }
+
 
         private void ImportDataToDatabase()
         {
@@ -67,16 +73,15 @@ namespace coba_1
                         continue; // Lewati baris ini jika tidak valid
                     }
 
-                    string query = "INSERT INTO [user] (PelangganID, Nama, NoWA, CreatedAt) VALUES (@PelangganID, @Nama, @NoWA, @CreatedAt)";
+                    string query = "INSERT INTO [user] (Nama, NoWA) VALUES ( @Nama, @NoWA)";
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
                         using (SqlCommand cmd = new SqlCommand(query, conn))
                         {
-                            cmd.Parameters.AddWithValue("@PelangganID", row["PelangganID"]);
+                            
                             cmd.Parameters.AddWithValue("@Nama", row["Nama"]);
                             cmd.Parameters.AddWithValue("@NoWA", row["NoWA"]);
-                            cmd.Parameters.AddWithValue("@CreatedAt", row["CreatedAt"]);
                             cmd.ExecuteNonQuery();
                         }
                     }
