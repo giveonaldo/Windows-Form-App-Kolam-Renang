@@ -39,6 +39,7 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.lblmessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKelolaTiket)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,7 +116,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.BackColor = System.Drawing.Color.Yellow;
+            this.btnUpdate.BackColor = System.Drawing.Color.FloralWhite;
             this.btnUpdate.Location = new System.Drawing.Point(503, 353);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(84, 34);
@@ -137,19 +138,32 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(50, 504);
+            this.btnBack.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBack.Location = new System.Drawing.Point(609, 504);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 10;
             this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // lblmessage
+            // 
+            this.lblmessage.AutoSize = true;
+            this.lblmessage.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblmessage.Location = new System.Drawing.Point(37, 504);
+            this.lblmessage.Name = "lblmessage";
+            this.lblmessage.Size = new System.Drawing.Size(64, 16);
+            this.lblmessage.TabIndex = 11;
+            this.lblmessage.Text = "Message";
             // 
             // KelolaTiket
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(712, 547);
+            this.Controls.Add(this.lblmessage);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
@@ -182,5 +196,6 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Label lblmessage;
     }
 }
