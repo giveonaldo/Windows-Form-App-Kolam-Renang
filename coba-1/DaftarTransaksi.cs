@@ -14,7 +14,7 @@ namespace coba_1
 {
     public partial class DaftarTransaksi : Form
     {
-        string connString = "Data Source=DESKTOP-UMBBMDS\\MSSQLSERVER01;Initial Catalog=kolam_renang;Integrated Security=True;";
+        string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_pacific_;Integrated Security=True";
         public DaftarTransaksi()
         {
             InitializeComponent();
@@ -59,6 +59,13 @@ namespace coba_1
         {
             DaftarPelanggan daftarPelanggan = new DaftarPelanggan();
             daftarPelanggan.Show();
+            this.Hide();
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            ReportTransaksi reportTransaksi = new ReportTransaksi();
+            reportTransaksi.Show();
             this.Hide();
         }
     }

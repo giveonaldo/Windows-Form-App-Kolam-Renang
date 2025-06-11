@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnTiket = new System.Windows.Forms.Button();
             this.btnPelanggan = new System.Windows.Forms.Button();
+            this.btnReport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,17 +83,31 @@
             this.btnPelanggan.UseVisualStyleBackColor = false;
             this.btnPelanggan.Click += new System.EventHandler(this.btnPelanggan_Click);
             // 
-            // Form3
+            // btnReport
+            // 
+            this.btnReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReport.Location = new System.Drawing.Point(1047, 276);
+            this.btnReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(173, 55);
+            this.btnReport.TabIndex = 4;
+            this.btnReport.Text = "Report";
+            this.btnReport.UseVisualStyleBackColor = false;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // DaftarTransaksi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1255, 450);
+            this.Controls.Add(this.btnReport);
             this.Controls.Add(this.btnPelanggan);
             this.Controls.Add(this.btnTiket);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvTable);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Form3";
+            this.Name = "DaftarTransaksi";
             this.Text = "Transaksi";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
             this.ResumeLayout(false);
@@ -106,5 +121,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnTiket;
         private System.Windows.Forms.Button btnPelanggan;
+        private System.Windows.Forms.Button btnReport;
     }
 }

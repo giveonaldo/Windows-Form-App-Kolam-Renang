@@ -69,6 +69,9 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=9.0.0.5, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.9.0.5\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WinForms.v12.12.0.0.1\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=9.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.9.2.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
@@ -168,11 +171,22 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportTransaksi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportTransaksi.Designer.cs">
+      <DependentUpon>ReportTransaksi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tiket.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Tiket.Designer.cs">
       <DependentUpon>Tiket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TransaksiDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransaksiDataSet.xsd</DependentUpon>
     </Compile>
     <EmbeddedResource Include="DaftarPelanggan.resx">
       <DependentUpon>DaftarPelanggan.cs</DependentUpon>
@@ -204,9 +218,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportTransaksi.resx">
+      <DependentUpon>ReportTransaksi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tiket.resx">
       <DependentUpon>Tiket.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TransaksiReport.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -217,6 +235,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="TransaksiDataSet.xsc">
+      <DependentUpon>TransaksiDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="TransaksiDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TransaksiDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="TransaksiDataSet.xss">
+      <DependentUpon>TransaksiDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
