@@ -28,18 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dgvTable = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnTiket = new System.Windows.Forms.Button();
             this.btnPelanggan = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
+            this.chartTransaksi = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTransaksi)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvTable
             // 
             this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTable.Location = new System.Drawing.Point(64, 97);
+            this.dgvTable.Location = new System.Drawing.Point(64, 62);
             this.dgvTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvTable.Name = "dgvTable";
             this.dgvTable.RowHeadersWidth = 51;
@@ -96,12 +101,30 @@
             this.btnReport.UseVisualStyleBackColor = false;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
+            // chartTransaksi
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartTransaksi.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartTransaksi.Legends.Add(legend1);
+            this.chartTransaksi.Location = new System.Drawing.Point(64, 384);
+            this.chartTransaksi.Name = "chartTransaksi";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartTransaksi.Series.Add(series1);
+            this.chartTransaksi.Size = new System.Drawing.Size(883, 300);
+            this.chartTransaksi.TabIndex = 5;
+            this.chartTransaksi.Text = "Chart Transaksi";
+            
+            // 
             // DaftarTransaksi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1255, 450);
+            this.ClientSize = new System.Drawing.Size(1255, 696);
+            this.Controls.Add(this.chartTransaksi);
             this.Controls.Add(this.btnReport);
             this.Controls.Add(this.btnPelanggan);
             this.Controls.Add(this.btnTiket);
@@ -111,6 +134,7 @@
             this.Name = "DaftarTransaksi";
             this.Text = "Transaksi";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTransaksi)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,5 +147,6 @@
         private System.Windows.Forms.Button btnTiket;
         private System.Windows.Forms.Button btnPelanggan;
         private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartTransaksi;
     }
 }
