@@ -17,6 +17,9 @@ namespace coba_1
 {
     public partial class KelolaTiket : Form
     {
+        Koneksi kn = new Koneksi(); // memanggil class koneksi
+        string strKonek = "";
+
         string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_;Integrated Security=True";
 
         private MemoryCache cache = MemoryCache.Default;
@@ -25,11 +28,12 @@ namespace coba_1
         {
             InitializeComponent();
             LoadTiket();
+            strKonek = kn.connectionString();
         }
 
         private void LoadTiket()
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -39,7 +43,10 @@ namespace coba_1
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        SqlConnection connString = new SqlConnection(strKonek);
+                        SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Mahasiswa", conn);
                         DataTable dt = new DataTable();
+                        da.Fill(dt);
                         adapter.Fill(dt);
 
                         dgvKelolaTiket.AutoGenerateColumns = true;
@@ -147,7 +154,7 @@ namespace coba_1
                         try
                         {
                             string tiketID = dgvKelolaTiket.SelectedRows[0].Cells["TiketID"].Value.ToString();
-                            conn.Open();
+                            
 
                             using (SqlCommand cmd = new SqlCommand("sp_DeleteTiket", conn, transaction))
                             {

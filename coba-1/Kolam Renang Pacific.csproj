@@ -177,6 +177,7 @@
     <Compile Include="DaftarPelanggan.Designer.cs">
       <DependentUpon>DaftarPelanggan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Koneksi.cs" />
     <Compile Include="LoginRegisterUser.cs">
       <SubType>Form</SubType>
     </Compile>

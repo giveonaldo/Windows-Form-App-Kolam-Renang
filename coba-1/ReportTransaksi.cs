@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,8 @@ namespace coba_1
             reportViewer1.LocalReport.DataSources.Add(rds);
 
             // Tentukan path ke file RDLC
-            reportViewer1.LocalReport.ReportPath = @"D:\Windows-Form-App-Kolam-Renang\coba-1\TransaksiReport.rdlc";
+            string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TransaksiReport.rdlc");
+            reportViewer1.LocalReport.ReportPath = reportPath;
 
             // Refresh untuk menampilkan laporan
             reportViewer1.RefreshReport();

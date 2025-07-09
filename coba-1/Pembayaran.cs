@@ -14,7 +14,7 @@ namespace coba_1
 {
     public partial class Pembayaran: Form
     {
-
+        Koneksi kn = new Koneksi();
         string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_;Integrated Security=True";
 
         public Pembayaran()
@@ -25,7 +25,7 @@ namespace coba_1
 
         private void LoadTiket()
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {

@@ -17,16 +17,51 @@ namespace coba_1
 {
     public partial class DaftarPelanggan: Form
     {
+        Koneksi kn = new Koneksi();
         string connString = "Data Source=MSI\\WILDAN_INDI;" + "Initial Catalog=kolam_renang_;Integrated Security=True";
         public DaftarPelanggan()
         {
             InitializeComponent();
+            EnsureIndexes();
             LoadPelanggan();
         }
 
+        private void EnsureIndexes()
+        {
+            using (var conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                var indexScript = @"
+        IF OBJECT_ID('dbo.[user]', 'U') IS NOT NULL
+        BEGIN
+            -- Index untuk Nama
+            IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'idx_User_Nama')
+                CREATE NONCLUSTERED INDEX idx_User_Nama ON dbo.[user](Nama);
+            
+            -- Index untuk NoWA
+            IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'idx_User_NoWA')
+                CREATE NONCLUSTERED INDEX idx_User_NoWA ON dbo.[user](NoWA);
+            
+            -- Index untuk is_admin
+            IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'idx_User_is_admin')
+                CREATE NONCLUSTERED INDEX idx_User_is_admin ON dbo.[user](is_admin);
+            
+            -- Index untuk CreatedAt
+            IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'idx_User_CreatedAt')
+                CREATE NONCLUSTERED INDEX idx_User_CreatedAt ON dbo.[user](CreatedAt);
+        END";
+
+                using (var cmd = new SqlCommand(indexScript, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
         private void LoadPelanggan()
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
